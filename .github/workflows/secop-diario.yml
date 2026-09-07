@@ -1,0 +1,29 @@
+name: SECOP diario - Chronos Asociados
+
+on:
+  schedule:
+    # 11:00 UTC = 6:00 a.m. hora Colombia (America/Bogota, UTC-5)
+    - cron: "0 11 * * *"
+  workflow_dispatch: {}   # permite correrlo manualmente desde la pestaña "Actions" para probar
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Consultar SECOP y enviar el correo
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          DEST_EMAIL: ${{ secrets.DEST_EMAIL }}
+        run: python secop_monitor.py

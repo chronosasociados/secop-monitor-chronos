@@ -3,8 +3,12 @@ name: SECOP diario - Chronos Asociados
 on:
   schedule:
     # 11:00 UTC = 6:00 a.m. hora Colombia (America/Bogota, UTC-5)
-    - cron: "0 11 * * *"
+    # Solo martes y viernes (2 = martes, 5 = viernes)
+    - cron: "0 11 * * 2,5"
   workflow_dispatch: {}   # permite correrlo manualmente desde la pestaña "Actions" para probar
+
+permissions:
+  contents: write   # necesario para que el workflow pueda guardar secop_data.json en el repo
 
 jobs:
   monitor:
@@ -27,3 +31,11 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           DEST_EMAIL: ${{ secrets.DEST_EMAIL }}
         run: python secop_monitor.py
+
+      - name: Guardar los resultados del día en el repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add secop_data.json
+          git diff --cached --quiet || git commit -m "Datos SECOP del $(date -u +%Y-%m-%d)"
+          git push

@@ -1,6 +1,6 @@
 {
   "generado": "2026-09-09",
-  "total": 9,
+  "total": 10,
   "procesos": [
     {
       "numero_proceso": "SAMC-203-CENACAVIACION2026",
@@ -9,7 +9,7 @@
       "valor": 658977000.0,
       "fecha_limite": "2026-09-15",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10769005",
-      "region": "Nacional",
+      "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -20,7 +20,7 @@
       "valor": 1095840655.0,
       "fecha_limite": "2026-09-16",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10607202",
-      "region": "Nacional",
+      "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -31,7 +31,7 @@
       "valor": 1295615712.0,
       "fecha_limite": "2026-09-18",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10752884",
-      "region": "Norte",
+      "region": "Sucre",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -42,7 +42,7 @@
       "valor": 925393891.0,
       "fecha_limite": "2026-09-18",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10650622",
-      "region": "Nacional",
+      "region": "Quindío",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -53,7 +53,7 @@
       "valor": 444149906.0,
       "fecha_limite": "2026-09-22",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10832191",
-      "region": "Nacional",
+      "region": "Atlántico",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -64,7 +64,7 @@
       "valor": 3012629400.0,
       "fecha_limite": "2026-09-22",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10823607",
-      "region": "Nacional",
+      "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -75,7 +75,7 @@
       "valor": 5669365005.0,
       "fecha_limite": "2026-09-23",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10820151",
-      "region": "Orinoquia",
+      "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -86,7 +86,18 @@
       "valor": 2414771000.0,
       "fecha_limite": "2026-09-23",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10849906",
-      "region": "Nacional",
+      "region": "Tolima",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SAMC009-2026",
+      "entidad": "GOBERNACION DE NARIÑO",
+      "objeto": "SELECCIÓN ABREVIADA DE MENOR CUANTIA- ANTENAS",
+      "valor": 449808684.0,
+      "fecha_limite": "2026-09-25",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10810039",
+      "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -97,7 +108,7 @@
       "valor": 5754262767.0,
       "fecha_limite": "2026-09-30",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10824584",
-      "region": "Orinoquia",
+      "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     }

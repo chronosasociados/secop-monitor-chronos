@@ -1,0 +1,105 @@
+{
+  "generado": "2026-09-09",
+  "total": 9,
+  "procesos": [
+    {
+      "numero_proceso": "SAMC-203-CENACAVIACION2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "SERVICIO DE EXCHANGE - OVERHAUL PARA APU (UNIDAD AUXILIAR DE POTENCIA) DE LAS AERONAVES ANTONOV-32 DEL EJÉRCITO NACIONAL",
+      "valor": 658977000.0,
+      "fecha_limite": "2026-09-15",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10769005",
+      "region": "Nacional",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001145 A H3",
+      "entidad": "AEROCIVIL",
+      "objeto": "63416C1560 REALIZAR EL MANTENIMIENTO DE LOS SISTEMAS DE AYUDAS VISUALES; DE MONITOREO SCADA; COMUNICACION; RADIOFRECUENCIA Y TELEFONIA CON SISTEMAS COMPLEMENTARIOS INSTALADOS EN EL AEROPUERTO INTERNAC",
+      "valor": 1095840655.0,
+      "fecha_limite": "2026-09-16",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10607202",
+      "region": "Nacional",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LP-006-2026",
+      "entidad": "GOBERNACION DE SUCRE",
+      "objeto": "CONSTRUCCION DE SOLUCIONES FOTOVOLTAICAS PARA EL SUMINISTRO DE ENERGÍA EN ENTIDADES PUBLICAS DEL MUNICIPIO DE COROZAL; SUCRE",
+      "valor": 1295615712.0,
+      "fecha_limite": "2026-09-18",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10752884",
+      "region": "Norte",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SAM-002 DE 2026 (Manifestación de interés (Menor Cuantía))",
+      "entidad": "Rama Judicial  Dirección Seccional de Administración Judicial de Armenia",
+      "objeto": "Realizar los estudios; diseños; suministro; instalación; legalización y puesta en funcionamiento de sistemas solares fotovoltaicos conectados a la red para los Palacios de Justicia de Armenia y Calarc",
+      "valor": 925393891.0,
+      "fecha_limite": "2026-09-18",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10650622",
+      "region": "Nacional",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SAMC-ATL-CIA-031-2026",
+      "entidad": "SENA REGIONAL ATLANTICO Intercentros",
+      "objeto": "MANTENIMIENTO AVIACION",
+      "valor": 444149906.0,
+      "fecha_limite": "2026-09-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10832191",
+      "region": "Nacional",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "PN DIRAN SA 025 2026",
+      "entidad": "DIRECCION DE ANTINARCOTICOS",
+      "objeto": "PRESTACIÓN DE SERVICIO PARA LA ACTUALIZACIÒN DE LOS MANUALES TÉCNICOS DE MANTENIMIENTO; MANUALES DE PARTES; MANUALES DE OVERHAUL; MANUALES DE VUELO; SERVICIOS DE INFORMACIÓN Y MISCELÁNEOS; ACTUALIZACI",
+      "valor": 3012629400.0,
+      "fecha_limite": "2026-09-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10823607",
+      "region": "Nacional",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "ARI.LP-021-2026",
+      "entidad": "ARAUCA ILUMINADA SAS ESP",
+      "objeto": "IMPLEMENTACIÓN DE SISTEMAS DE ENERGÍA FOTOVOLTAICA EN INSTITUCIONES EDUCATIVAS DEL MUNICIPIO DE TAME; DEPARTAMENTO DE ARAUCA",
+      "valor": 5669365005.0,
+      "fecha_limite": "2026-09-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10820151",
+      "region": "Orinoquia",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASI-CIC-9226-407-2026 ",
+      "entidad": "SENA REGIONAL TOLIMA 1",
+      "objeto": "ADQUISICIÓN DE EQUIPOS Y MATERIALES FOTOVOLTAICOS",
+      "valor": 2414771000.0,
+      "fecha_limite": "2026-09-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10849906",
+      "region": "Nacional",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LP-CN-002-2026",
+      "entidad": "ALCALDIA MUNICIPIO DE CRAVO NORTE",
+      "objeto": "ADMINISTRACIÓN; OPERACIÓN Y MANTENIMIENTO DE LAS SOLUCIONES INDIVIDUALES SOLARES FOTOVOLTAICAS PARA LA GENERACION DE ENERGIA ELECTRICA EN ZONA RURAL DISPERSA DEL MUNICIPIO DE CRAVO NORTE; ARAUCA",
+      "valor": 5754262767.0,
+      "fecha_limite": "2026-09-30",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10824584",
+      "region": "Orinoquia",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    }
+  ]
+}

@@ -12,6 +12,12 @@ que cumplen los criterios de Chronos Asociados:
     - Valor mínimo: $350.000.000 COP
     - Alcance: nacional, pero clasificado por región de interés
 
+Este script está pensado para correr en un entorno con acceso normal a
+internet (tu propio computador, un servidor, GitHub Actions, PythonAnywhere,
+etc.) — NO dentro del sandbox de Claude, cuyo acceso a redes externas está
+restringido. Dentro de Claude, el mismo filtro se ejecuta usando el
+navegador (Claude Browser) en la tarea programada diaria.
+
 Uso:
     pip install requests
     python secop_monitor.py                # imprime el resumen en pantalla
@@ -77,6 +83,11 @@ REGIONES = {
     ],
 }
 
+# Palabras clave que definen cada categoría (para clasificar cada proceso en
+# la app de Base44 como "Aeronáutica Civil" o "Energía Solar Fotovoltaica").
+PALABRAS_AERONAUTICA = ["AERONAUT", "AERONAVE", "AEROPUERTO", "AERODROMO", "AVIACION"]
+PALABRAS_SOLAR = ["FOTOVOLTAIC", "ENERGIA SOLAR"]
+
 # Municipios "ancla" para reconocer procesos que, aunque la entidad esté
 # registrada en Bogotá (p.ej. Aerocivil), en realidad se ejecutan en una de
 # las regiones de interés (esto pasa mucho con aeropuertos regionales).
@@ -140,7 +151,40 @@ def clasificar_region(proceso: dict) -> str:
         if region and any(m.upper() in texto for m in municipios):
             return region
 
-    return "Nacional / sin región específica"
+    return "Nacional"
+
+
+def clasificar_categoria(proceso: dict) -> str:
+    """Determina si el proceso es de Aeronáutica Civil o de Energía Solar
+    Fotovoltaica, según qué palabra clave hizo match."""
+    texto = " ".join(
+        [
+            proceso.get("nombre_del_procedimiento") or "",
+            proceso.get("descripci_n_del_procedimiento") or "",
+        ]
+    ).upper()
+    if any(p in texto for p in PALABRAS_SOLAR):
+        return "Energía Solar Fotovoltaica"
+    if any(p in texto for p in PALABRAS_AERONAUTICA):
+        return "Aeronáutica Civil"
+    return "Aeronáutica Civil"  # respaldo (no debería pasar: el filtro ya exige una de las dos)
+
+
+def a_registro_base44(p: dict) -> dict:
+    """Convierte un proceso al formato exacto que espera la entidad
+    ProcesoSecop de la app de Base44."""
+    fecha = (p.get("fecha_de_recepcion_de") or "")[:10] or None
+    return {
+        "numero_proceso": p.get("referencia_del_proceso") or p.get("id_del_proceso") or "(sin número)",
+        "entidad": p.get("entidad") or "",
+        "objeto": p.get("nombre_del_procedimiento") or p.get("descripci_n_del_procedimiento") or "",
+        "valor": float(p.get("precio_base") or 0),
+        "fecha_limite": fecha,
+        "link": (p.get("urlproceso") or {}).get("url", ""),
+        "region": clasificar_region(p),
+        "categoria": clasificar_categoria(p),
+        "estado": "Abierto",
+    }
 
 
 def _clave_dedup(p: dict) -> tuple:
@@ -198,7 +242,7 @@ def deduplicar(procesos: list[dict]) -> list[dict]:
     return list(vistos.values())
 
 
-ORDEN_REGIONES = ["Orinoquia", "Amazonía", "Centro", "Norte", "Nacional / sin región específica"]
+ORDEN_REGIONES = ["Orinoquia", "Amazonía", "Centro", "Norte", "Nacional"]
 
 
 def _agrupar_por_region(procesos: list[dict]) -> dict[str, list[dict]]:
@@ -353,6 +397,13 @@ def enviar_por_correo(asunto: str, cuerpo_texto: str, cuerpo_html: str) -> None:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", help="Ruta opcional para guardar el JSON crudo de resultados")
+    ap.add_argument(
+        "--base44-json",
+        default="secop_data.json",
+        help="Ruta donde se guarda siempre el resumen del día ya listo para la app de "
+        "Base44 (numero_proceso, entidad, objeto, valor, fecha_limite, link, region, "
+        "categoria, estado). Por defecto: secop_data.json en el directorio actual.",
+    )
     args = ap.parse_args()
 
     hoy = datetime.date.today()
@@ -362,6 +413,18 @@ def main():
     if args.json:
         with open(args.json, "w", encoding="utf-8") as f:
             json.dump(procesos, f, ensure_ascii=False, indent=2)
+
+    # Este archivo se guarda SIEMPRE (no solo con --json) porque GitHub Actions
+    # lo sube de vuelta al repositorio en cada corrida, y desde ahí Claude lo
+    # lee para mantener sincronizada la app de Base44 sin depender de tu PC.
+    registros_base44 = [a_registro_base44(p) for p in procesos]
+    with open(args.base44_json, "w", encoding="utf-8") as f:
+        json.dump(
+            {"generado": hoy.isoformat(), "total": len(registros_base44), "procesos": registros_base44},
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
 
     resumen_texto = formatear_resumen(procesos, hoy)
     resumen_html = formatear_resumen_html(procesos, hoy)

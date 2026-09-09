@@ -15,8 +15,7 @@ que cumplen los criterios de Chronos Asociados:
 Este script está pensado para correr en un entorno con acceso normal a
 internet (tu propio computador, un servidor, GitHub Actions, PythonAnywhere,
 etc.) — NO dentro del sandbox de Claude, cuyo acceso a redes externas está
-restringido. Dentro de Claude, el mismo filtro se ejecuta usando el
-navegador (Claude Browser) en la tarea programada diaria.
+restringido. En producción corre vía GitHub Actions, los martes y viernes.
 
 Uso:
     pip install requests

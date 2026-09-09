@@ -1,7 +1,18 @@
 {
   "generado": "2026-09-09",
-  "total": 10,
+  "total": 14,
   "procesos": [
+    {
+      "numero_proceso": "SAMC-136-CENACAVIACION-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN DE CARGAS UTILES Y ACCESORIOS PARA AERONAVES NO TRIPULADAS UAS PARA LA VIGENCIA 2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
+      "valor": 1266634757.0,
+      "fecha_limite": "2026-09-11",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10831143",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
     {
       "numero_proceso": "SAMC-203-CENACAVIACION2026",
       "entidad": "CENAC AVIACION",
@@ -69,6 +80,17 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "SAMC-150-CENACAVIACION-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN DE AIRES ACONDICIONADOS; ADQUISICIÓN E INSTALACIÓN DE ELECTROBOMBAS Y SISTEMAS DE ALMACENAMIENTO Y BOMBEO DE AGUA POTABLE; PARA UNIDADES CENTRALIZADAS POR LA CENACAVIACIÓN",
+      "valor": 443500602.0,
+      "fecha_limite": "2026-09-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10817113",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "ARI.LP-021-2026",
       "entidad": "ARAUCA ILUMINADA SAS ESP",
       "objeto": "IMPLEMENTACIÓN DE SISTEMAS DE ENERGÍA FOTOVOLTAICA EN INSTITUCIONES EDUCATIVAS DEL MUNICIPIO DE TAME; DEPARTAMENTO DE ARAUCA",
@@ -77,6 +99,17 @@
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10820151",
       "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SAMC-118-CENACAVIACIÓN-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN DE REPUESTOS PARA EL MANTENIMIENTO DE EQUIPOS FARE; TANQUES FIJOS Y CARROTANQUES DE SUMINISTRO COMBUSTIBLES DE AVIACIÓN",
+      "valor": 374471275.0,
+      "fecha_limite": "2026-09-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10809901",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {
@@ -99,6 +132,17 @@
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10810039",
       "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "244-00-A-COFAC-CODAF-2026",
+      "entidad": "FUERZA AEROESPACIAL COLOMBIANA",
+      "objeto": "SUMINISTRO DE COMBUSTIBLE DE AVIACIÓN PARA LAS AERONAVES DE LA FUERZA PÚBLICA; DEL ESTADO Y DEMÁS ENTIDADES CON LAS CUALES SE TENGAN CONVENIOS; CONTRATOS; ACUERDOS O QUE PRESTEN SUS SERVICIOS O ESTÉN",
+      "valor": 46590820422.0,
+      "fecha_limite": "2026-09-25",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {

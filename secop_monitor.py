@@ -13,9 +13,11 @@ que cumplen los criterios de Chronos Asociados:
             importar las palabras del título — se busca por la entidad
             misma), más cualquier otro proceso de cualquier entidad
             relacionado con aeronáutica/aviación
-        (2) cualquier proceso de energía solar (fotovoltaica o cualquier
-            otra variante: paneles, bombas, sistemas, luminarias solares,
-            etc.), publicado por cualquier entidad del país
+        (2) cualquier proceso de energía solar o energías limpias/verdes/
+            alternativas/renovables en general (fotovoltaica, paneles,
+            bombas, sistemas, luminarias solares, energía limpia, energía
+            verde, energía alternativa, energía renovable, energía
+            sostenible, etc.), publicado por cualquier entidad del país
     - Valor mínimo: $350.000.000 COP
     - Alcance: TODO el país, sin límite a ninguna región — clasificado por
       departamento (no por macro-región) para que no se quede nada por fuera
@@ -66,11 +68,26 @@ DATASET_URL = "https://www.datos.gov.co/resource/p6dx-8zbt.json"
 #
 #   1. Aeronáutica civil: por palabra clave EN CUALQUIER ENTIDAD, más TODO lo
 #      publicado por la Aeronáutica Civil / Aerocivil sin importar palabras.
-#   2. Energía solar: por palabra clave, en cualquier entidad del país. Aquí
-#      no hay una sola entidad "dueña" del tema (publican municipios,
-#      gobernaciones, ENELAR, IPSE, etc.), así que la ampliación es de
-#      vocabulario, no de entidad.
-PALABRAS_AERONAUTICA = ["AERONAUT", "AERONAVE", "AEROPUERTO", "AERODROMO", "AVIACION", "HELIPUERTO", "NAVEGACION AEREA"]
+#   2. Energía solar / energías limpias en general: por palabra clave, en
+#      cualquier entidad del país. Aquí no hay una sola entidad "dueña" del
+#      tema (publican municipios, gobernaciones, ENELAR, IPSE, etc.), así que
+#      la ampliación es de vocabulario, no de entidad.
+#
+# Las palabras se escriben aquí CON sus tildes correctas en español; el
+# código genera automáticamente también la versión sin tilde (ver
+# _variantes_sin_tilde más abajo) y compara todo sin distinguir mayúsculas ni
+# tildes, porque el dataset de SECOP no es consistente: algunos registros
+# traen "aeronáutica" y otros "aeronautica". Así no se pierde ningún proceso
+# solo porque a un funcionario se le olvidó una tilde.
+PALABRAS_AERONAUTICA = [
+    "AERONÁUTIC",  # aeronáutica / aeronáutico
+    "AERONAVE",
+    "AEROPUERTO",
+    "AERÓDROMO",
+    "AVIACIÓN",
+    "HELIPUERTO",
+    "NAVEGACIÓN AÉREA",
+]
 
 # "SOLAR" solo (sin exigir que venga acompañada de "fotovoltaica" o "energía")
 # para no perder variantes como "bombas solares", "paneles solares",
@@ -78,7 +95,19 @@ PALABRAS_AERONAUTICA = ["AERONAUT", "AERONAVE", "AEROPUERTO", "AERODROMO", "AVIA
 # Nota: "solar" en español también puede significar "lote de terreno" (poco
 # común en SECOP, pero puede colar algún proceso de compra de terreno que no
 # es de energía — se puede ajustar si genera demasiado ruido).
-PALABRAS_SOLAR = ["FOTOVOLTAIC", "SOLAR"]
+# También se incluyen términos más amplios de energía limpia/verde/alternativa
+# por si el proceso no usa la palabra "solar" ni "fotovoltaica" directamente
+# (p.ej. "energías renovables", "energía limpia", "energía verde").
+PALABRAS_SOLAR = [
+    "FOTOVOLTAIC",
+    "SOLAR",
+    "ENERGÍA LIMPIA",
+    "ENERGÍA VERDE",
+    "ENERGÍA ALTERNATIVA",
+    "ENERGÍA RENOVABLE",
+    "ENERGÍAS RENOVABLES",
+    "ENERGÍA SOSTENIBLE",
+]
 
 PALABRAS_CLAVE = PALABRAS_AERONAUTICA + PALABRAS_SOLAR
 
@@ -89,7 +118,7 @@ PALABRAS_CLAVE = PALABRAS_AERONAUTICA + PALABRAS_SOLAR
 # Esto aplica SOLO al grupo de aeronáutica civil: no existe un equivalente
 # para energía solar porque no hay una única entidad que la publique.
 ENTIDADES_CLAVE = [
-    "AERONAUTICA CIVIL",
+    "AERONÁUTICA CIVIL",
     "AEROCIVIL",
 ]
 
@@ -105,17 +134,42 @@ MUNICIPIOS_POR_DEPARTAMENTO = {
     # detectarlos por nombre de ciudad/aeropuerto en el texto del proceso.
 }
 
+_MAPA_TILDES = {"Á": "A", "É": "E", "Í": "I", "Ó": "O", "Ú": "U", "Ñ": "N", "Ü": "U"}
+
+
+def _quitar_tildes(texto: str) -> str:
+    """Quita tildes (y upper-case) para poder comparar sin importar si el
+    texto original las trae o no — el dataset de SECOP es inconsistente en
+    esto, y NO queremos perder un proceso solo por una tilde de más o de
+    menos."""
+    texto = texto.upper()
+    return "".join(_MAPA_TILDES.get(c, c) for c in texto)
+
+
+def _variantes_sin_tilde(palabra: str) -> list[str]:
+    """Para una palabra clave (posiblemente con tildes), devuelve la lista de
+    variantes a buscar: la original y, si es distinta, la versión sin tildes.
+    Se usa para armar el $where de SoQL, que compara texto literal y no
+    puede "ignorar" tildes por sí solo."""
+    sin_tilde = _quitar_tildes(palabra)
+    if sin_tilde == palabra.upper():
+        return [palabra.upper()]
+    return [palabra.upper(), sin_tilde]
+
 
 def construir_where(fecha_min_iso: str) -> str:
     """Arma la cláusula $where de SoQL: (sector por palabra clave EN CUALQUIER
-    ENTIDAD) OR (cualquier proceso publicado por Aerocivil/Aeronáutica Civil,
-    sin exigir palabra clave) + valor mínimo + aún abierto."""
+    ENTIDAD, con y sin tildes) OR (cualquier proceso publicado por
+    Aerocivil/Aeronáutica Civil, sin exigir palabra clave) + valor mínimo +
+    aún abierto."""
     ors = []
     for palabra in PALABRAS_CLAVE:
-        ors.append(f"upper(nombre_del_procedimiento) like '%{palabra}%'")
-        ors.append(f"upper(descripci_n_del_procedimiento) like '%{palabra}%'")
+        for variante in _variantes_sin_tilde(palabra):
+            ors.append(f"upper(nombre_del_procedimiento) like '%{variante}%'")
+            ors.append(f"upper(descripci_n_del_procedimiento) like '%{variante}%'")
     for entidad_clave in ENTIDADES_CLAVE:
-        ors.append(f"upper(entidad) like '%{entidad_clave}%'")
+        for variante in _variantes_sin_tilde(entidad_clave):
+            ors.append(f"upper(entidad) like '%{variante}%'")
     clausula_sector = " OR ".join(ors)
     return (
         f"( {clausula_sector} ) "
@@ -148,16 +202,18 @@ def clasificar_departamento(proceso: dict) -> str:
     (para no perder procesos de entidades nacionales, tipo Aerocivil, que en
     realidad se ejecutan en una región concreta); si no, usa el departamento
     de la entidad tal como lo reporta el dataset."""
-    texto = " ".join(
-        [
-            proceso.get("nombre_del_procedimiento") or "",
-            proceso.get("descripci_n_del_procedimiento") or "",
-            proceso.get("ciudad_entidad") or "",
-        ]
-    ).upper()
+    texto = _quitar_tildes(
+        " ".join(
+            [
+                proceso.get("nombre_del_procedimiento") or "",
+                proceso.get("descripci_n_del_procedimiento") or "",
+                proceso.get("ciudad_entidad") or "",
+            ]
+        )
+    )
 
     for depto_ancla, municipios in MUNICIPIOS_POR_DEPARTAMENTO.items():
-        if any(m.upper() in texto for m in municipios):
+        if any(_quitar_tildes(m) in texto for m in municipios):
             return depto_ancla
 
     depto = (proceso.get("departamento_entidad") or "").strip()
@@ -167,15 +223,17 @@ def clasificar_departamento(proceso: dict) -> str:
 def clasificar_categoria(proceso: dict) -> str:
     """Determina si el proceso es de Aeronáutica Civil o de Energía Solar
     Fotovoltaica, según qué palabra clave hizo match."""
-    texto = " ".join(
-        [
-            proceso.get("nombre_del_procedimiento") or "",
-            proceso.get("descripci_n_del_procedimiento") or "",
-        ]
-    ).upper()
-    if any(p in texto for p in PALABRAS_SOLAR):
+    texto = _quitar_tildes(
+        " ".join(
+            [
+                proceso.get("nombre_del_procedimiento") or "",
+                proceso.get("descripci_n_del_procedimiento") or "",
+            ]
+        )
+    )
+    if any(_quitar_tildes(p) in texto for p in PALABRAS_SOLAR):
         return "Energía Solar Fotovoltaica"
-    if any(p in texto for p in PALABRAS_AERONAUTICA):
+    if any(_quitar_tildes(p) in texto for p in PALABRAS_AERONAUTICA):
         return "Aeronáutica Civil"
     return "Aeronáutica Civil"  # respaldo (no debería pasar: el filtro ya exige una de las dos)
 

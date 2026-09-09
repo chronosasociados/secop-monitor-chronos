@@ -8,9 +8,17 @@ Consulta el dataset abierto oficial "SECOP II - Procesos de Contratación"
 que están ACTUALMENTE ABIERTOS (fecha límite de respuesta aún no vencida) y
 que cumplen los criterios de Chronos Asociados:
 
-    - Sector: aeronáutica civil (y relacionados) o energía solar fotovoltaica
+    - Sector: dos grupos de búsqueda independientes —
+        (1) TODO lo publicado por la Aeronáutica Civil / Aerocivil (sin
+            importar las palabras del título — se busca por la entidad
+            misma), más cualquier otro proceso de cualquier entidad
+            relacionado con aeronáutica/aviación
+        (2) cualquier proceso de energía solar (fotovoltaica o cualquier
+            otra variante: paneles, bombas, sistemas, luminarias solares,
+            etc.), publicado por cualquier entidad del país
     - Valor mínimo: $350.000.000 COP
-    - Alcance: nacional, pero clasificado por región de interés
+    - Alcance: TODO el país, sin límite a ninguna región — clasificado por
+      departamento (no por macro-región) para que no se quede nada por fuera
 
 Este script está pensado para correr en un entorno con acceso normal a
 internet (tu propio computador, un servidor, GitHub Actions, PythonAnywhere,
@@ -53,60 +61,61 @@ DATASET_URL = "https://www.datos.gov.co/resource/p6dx-8zbt.json"
 # Criterios de búsqueda (ajusta aquí si cambian)
 # ---------------------------------------------------------------------------
 
-PALABRAS_CLAVE = [
-    "AERONAUT",
-    "AERONAVE",
-    "AEROPUERTO",
-    "AERODROMO",
-    "AVIACION",
-    "FOTOVOLTAIC",
-    "ENERGIA SOLAR",
+# Dos grupos de búsqueda INDEPENDIENTES (un proceso entra si cumple con
+# cualquiera de los dos, no hace falta que cumpla ambos):
+#
+#   1. Aeronáutica civil: por palabra clave EN CUALQUIER ENTIDAD, más TODO lo
+#      publicado por la Aeronáutica Civil / Aerocivil sin importar palabras.
+#   2. Energía solar: por palabra clave, en cualquier entidad del país. Aquí
+#      no hay una sola entidad "dueña" del tema (publican municipios,
+#      gobernaciones, ENELAR, IPSE, etc.), así que la ampliación es de
+#      vocabulario, no de entidad.
+PALABRAS_AERONAUTICA = ["AERONAUT", "AERONAVE", "AEROPUERTO", "AERODROMO", "AVIACION", "HELIPUERTO", "NAVEGACION AEREA"]
+
+# "SOLAR" solo (sin exigir que venga acompañada de "fotovoltaica" o "energía")
+# para no perder variantes como "bombas solares", "paneles solares",
+# "luminarias solares", "sistemas solares", "calentadores solares", etc.
+# Nota: "solar" en español también puede significar "lote de terreno" (poco
+# común en SECOP, pero puede colar algún proceso de compra de terreno que no
+# es de energía — se puede ajustar si genera demasiado ruido).
+PALABRAS_SOLAR = ["FOTOVOLTAIC", "SOLAR"]
+
+PALABRAS_CLAVE = PALABRAS_AERONAUTICA + PALABRAS_SOLAR
+
+# Entidades cuyos procesos se traen TODOS, sin importar si el título/objeto
+# menciona alguna de las palabras clave de arriba — así no se pierde ningún
+# proceso publicado por Aerocivil aunque esté redactado de forma genérica
+# (p.ej. "Adquisición de repuestos", "Prestación de servicios de aseo", etc.).
+# Esto aplica SOLO al grupo de aeronáutica civil: no existe un equivalente
+# para energía solar porque no hay una única entidad que la publique.
+ENTIDADES_CLAVE = [
+    "AERONAUTICA CIVIL",
+    "AEROCIVIL",
 ]
 
 VALOR_MINIMO = 350_000_000
 
-# Regiones de interés: departamento (tal como aparece en el dataset) -> región
-REGIONES = {
-    "Orinoquia": ["Vichada", "Meta", "Guainía", "Casanare", "Guaviare", "Arauca"],
-    "Amazonía": ["Amazonas", "Vaupés", "Caquetá", "Putumayo"],
-    "Centro": ["Cundinamarca", "Boyacá", "Huila"],
-    "Norte": [
-        "Santander",
-        "Norte de Santander",
-        "Cesar",
-        "La Guajira",
-        "Córdoba",
-        "Sucre",
-        "Bolívar",
-        "Magdalena",
-    ],
-}
-
-# Palabras clave que definen cada categoría (para clasificar cada proceso en
-# la app de Base44 como "Aeronáutica Civil" o "Energía Solar Fotovoltaica").
-PALABRAS_AERONAUTICA = ["AERONAUT", "AERONAVE", "AEROPUERTO", "AERODROMO", "AVIACION"]
-PALABRAS_SOLAR = ["FOTOVOLTAIC", "ENERGIA SOLAR"]
-
-# Municipios "ancla" para reconocer procesos que, aunque la entidad esté
-# registrada en Bogotá (p.ej. Aerocivil), en realidad se ejecutan en una de
-# las regiones de interés (esto pasa mucho con aeropuertos regionales).
+# Municipios "ancla": si el título/objeto/ciudad del proceso menciona uno de
+# estos municipios, se clasifica en ese departamento aunque la entidad que
+# publica el proceso esté registrada en otro (esto pasa mucho con Aerocivil,
+# que administra aeropuertos regionales pero aparece registrada en Bogotá).
 MUNICIPIOS_POR_DEPARTAMENTO = {
     "Arauca": ["Arauca", "Arauquita", "Cravo Norte", "Fortul", "Puerto Rondón", "Saravena", "Tame"],
     # Agrega aquí más municipios "ancla" de otros departamentos si te interesa
     # detectarlos por nombre de ciudad/aeropuerto en el texto del proceso.
 }
 
-DEPARTAMENTO_A_REGION = {
-    dep: region for region, deps in REGIONES.items() for dep in deps
-}
-
 
 def construir_where(fecha_min_iso: str) -> str:
-    """Arma la cláusula $where de SoQL: sector + valor mínimo + aún abierto."""
+    """Arma la cláusula $where de SoQL: (sector por palabra clave EN CUALQUIER
+    ENTIDAD) OR (cualquier proceso publicado por Aerocivil/Aeronáutica Civil,
+    sin exigir palabra clave) + valor mínimo + aún abierto."""
     ors = []
     for palabra in PALABRAS_CLAVE:
         ors.append(f"upper(nombre_del_procedimiento) like '%{palabra}%'")
         ors.append(f"upper(descripci_n_del_procedimiento) like '%{palabra}%'")
+    for entidad_clave in ENTIDADES_CLAVE:
+        ors.append(f"upper(entidad) like '%{entidad_clave}%'")
     clausula_sector = " OR ".join(ors)
     return (
         f"( {clausula_sector} ) "
@@ -132,11 +141,13 @@ def consultar_secop(fecha_min: datetime.date) -> list[dict]:
     return resp.json()
 
 
-def clasificar_region(proceso: dict) -> str:
-    depto = (proceso.get("departamento_entidad") or "").strip()
-    if depto in DEPARTAMENTO_A_REGION:
-        return DEPARTAMENTO_A_REGION[depto]
-
+def clasificar_departamento(proceso: dict) -> str:
+    """Devuelve el departamento de Colombia al que pertenece el proceso —
+    TODOS los departamentos son válidos, no solo un grupo fijo. Primero
+    revisa si el título/objeto/ciudad menciona un municipio "ancla" conocido
+    (para no perder procesos de entidades nacionales, tipo Aerocivil, que en
+    realidad se ejecutan en una región concreta); si no, usa el departamento
+    de la entidad tal como lo reporta el dataset."""
     texto = " ".join(
         [
             proceso.get("nombre_del_procedimiento") or "",
@@ -146,11 +157,11 @@ def clasificar_region(proceso: dict) -> str:
     ).upper()
 
     for depto_ancla, municipios in MUNICIPIOS_POR_DEPARTAMENTO.items():
-        region = DEPARTAMENTO_A_REGION.get(depto_ancla)
-        if region and any(m.upper() in texto for m in municipios):
-            return region
+        if any(m.upper() in texto for m in municipios):
+            return depto_ancla
 
-    return "Nacional"
+    depto = (proceso.get("departamento_entidad") or "").strip()
+    return depto or "Sin departamento (Nacional)"
 
 
 def clasificar_categoria(proceso: dict) -> str:
@@ -180,7 +191,7 @@ def a_registro_base44(p: dict) -> dict:
         "valor": float(p.get("precio_base") or 0),
         "fecha_limite": fecha,
         "link": (p.get("urlproceso") or {}).get("url", ""),
-        "region": clasificar_region(p),
+        "region": clasificar_departamento(p),
         "categoria": clasificar_categoria(p),
         "estado": "Abierto",
     }
@@ -241,16 +252,28 @@ def deduplicar(procesos: list[dict]) -> list[dict]:
     return list(vistos.values())
 
 
-ORDEN_REGIONES = ["Orinoquia", "Amazonía", "Centro", "Norte", "Nacional"]
-
-
-def _agrupar_por_region(procesos: list[dict]) -> dict[str, list[dict]]:
-    por_region: dict[str, list[dict]] = {}
+def _agrupar_por_departamento(procesos: list[dict]) -> dict[str, list[dict]]:
+    por_depto: dict[str, list[dict]] = {}
     for p in procesos:
-        por_region.setdefault(clasificar_region(p), []).append(p)
-    for items in por_region.values():
+        por_depto.setdefault(clasificar_departamento(p), []).append(p)
+    for items in por_depto.values():
         items.sort(key=lambda p: p.get("fecha_de_recepcion_de") or "9999")
-    return por_region
+    return por_depto
+
+
+def _orden_departamentos(por_depto: dict[str, list[dict]]) -> list[str]:
+    """Arauca primero (es la región de origen de Chronos), luego el resto de
+    departamentos en orden alfabético, y el catch-all al final."""
+    catchall = "Sin departamento (Nacional)"
+    deptos = [d for d in por_depto if d != "Arauca" and d != catchall]
+    deptos.sort()
+    orden = []
+    if "Arauca" in por_depto:
+        orden.append("Arauca")
+    orden.extend(deptos)
+    if catchall in por_depto:
+        orden.append(catchall)
+    return orden
 
 
 def _dias_restantes(p: dict, hoy: datetime.date):
@@ -268,14 +291,14 @@ def formatear_resumen(procesos: list[dict], hoy: datetime.date) -> str:
     if not procesos:
         return f"SECOP - Oportunidades del {hoy.isoformat()}\n\nNo hay procesos abiertos que cumplan los criterios hoy.\n"
 
-    por_region = _agrupar_por_region(procesos)
+    por_depto = _agrupar_por_departamento(procesos)
 
     lineas = [f"SECOP - Oportunidades abiertas del {hoy.isoformat()} ({len(procesos)} procesos)\n"]
-    for region in ORDEN_REGIONES:
-        items = por_region.get(region)
+    for depto in _orden_departamentos(por_depto):
+        items = por_depto.get(depto)
         if not items:
             continue
-        lineas.append(f"\n=== {region} ({len(items)}) ===")
+        lineas.append(f"\n=== {depto} ({len(items)}) ===")
         for p in items:
             fecha, dias = _dias_restantes(p, hoy)
             valor = int(float(p.get("precio_base") or 0))
@@ -310,7 +333,7 @@ def formatear_resumen_html(procesos: list[dict], hoy: datetime.date) -> str:
             f"</body></html>"
         )
 
-    por_region = _agrupar_por_region(procesos)
+    por_depto = _agrupar_por_departamento(procesos)
 
     partes = [
         "<html><body style='font-family:Arial,sans-serif;color:#111827;'>",
@@ -318,11 +341,11 @@ def formatear_resumen_html(procesos: list[dict], hoy: datetime.date) -> str:
         f"<p style='margin-top:0;color:#4b5563;'>{hoy.isoformat()} &middot; {len(procesos)} procesos</p>",
     ]
 
-    for region in ORDEN_REGIONES:
-        items = por_region.get(region)
+    for depto in _orden_departamentos(por_depto):
+        items = por_depto.get(depto)
         if not items:
             continue
-        partes.append(f"<h3 style='margin-bottom:6px;'>{html.escape(region)} ({len(items)})</h3>")
+        partes.append(f"<h3 style='margin-bottom:6px;'>{html.escape(depto)} ({len(items)})</h3>")
         partes.append(f"<table style='{estilo_tabla}'>")
         partes.append(
             "<tr>"
@@ -400,8 +423,9 @@ def main():
         "--base44-json",
         default="secop_data.json",
         help="Ruta donde se guarda siempre el resumen del día ya listo para la app de "
-        "Base44 (numero_proceso, entidad, objeto, valor, fecha_limite, link, region, "
-        "categoria, estado). Por defecto: secop_data.json en el directorio actual.",
+        "Base44 (numero_proceso, entidad, objeto, valor, fecha_limite, link, region "
+        "[ahora es el departamento], categoria, estado). Por defecto: secop_data.json "
+        "en el directorio actual.",
     )
     args = ap.parse_args()
 

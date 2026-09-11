@@ -1,6 +1,6 @@
 {
-  "generado": "2026-09-09",
-  "total": 14,
+  "generado": "2026-09-11",
+  "total": 16,
   "procesos": [
     {
       "numero_proceso": "SAMC-136-CENACAVIACION-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
@@ -146,6 +146,17 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "244-00-A-COFAC-CODAF-2026 copia",
+      "entidad": "FUERZA AEROESPACIAL COLOMBIANA",
+      "objeto": "244-00-A-COFAC-CODAF-2026 copia",
+      "valor": 46590820422.0,
+      "fecha_limite": "2026-09-25",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "LP-CN-002-2026",
       "entidad": "ALCALDIA MUNICIPIO DE CRAVO NORTE",
       "objeto": "ADMINISTRACIÓN; OPERACIÓN Y MANTENIMIENTO DE LAS SOLUCIONES INDIVIDUALES SOLARES FOTOVOLTAICAS PARA LA GENERACION DE ENERGIA ELECTRICA EN ZONA RURAL DISPERSA DEL MUNICIPIO DE CRAVO NORTE; ARAUCA",
@@ -154,6 +165,17 @@
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10824584",
       "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASD-220-CENACAVIACIÓN-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN AERONAVES NO TRIPULADAS CLASE I; CATEGORÍA 1A PELOTÓN",
+      "valor": 4625886599.0,
+      "fecha_limite": "2026-10-02",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     }
   ]

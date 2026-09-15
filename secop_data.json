@@ -1,18 +1,7 @@
 {
-  "generado": "2026-09-11",
-  "total": 16,
+  "generado": "2026-09-15",
+  "total": 17,
   "procesos": [
-    {
-      "numero_proceso": "SAMC-136-CENACAVIACION-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
-      "entidad": "CENAC AVIACION",
-      "objeto": "ADQUISICIÓN DE CARGAS UTILES Y ACCESORIOS PARA AERONAVES NO TRIPULADAS UAS PARA LA VIGENCIA 2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
-      "valor": 1266634757.0,
-      "fecha_limite": "2026-09-11",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10831143",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
     {
       "numero_proceso": "SAMC-203-CENACAVIACION2026",
       "entidad": "CENAC AVIACION",
@@ -36,24 +25,24 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "LP-006-2026",
+      "numero_proceso": "LP-006-2026 (Fase de Selección (Presentación de ofertas))",
       "entidad": "GOBERNACION DE SUCRE",
-      "objeto": "CONSTRUCCION DE SOLUCIONES FOTOVOLTAICAS PARA EL SUMINISTRO DE ENERGÍA EN ENTIDADES PUBLICAS DEL MUNICIPIO DE COROZAL; SUCRE",
+      "objeto": "CONSTRUCCION DE SOLUCIONES FOTOVOLTAICAS PARA EL SUMINISTRO DE ENERGÍA EN ENTIDADES PUBLICAS DEL MUNICIPIO DE COROZAL; SUCRE (Fase de Selección (Presentación de ofertas))",
       "valor": 1295615712.0,
-      "fecha_limite": "2026-09-18",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10752884",
+      "fecha_limite": "2026-09-21",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10869823",
       "region": "Sucre",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "SAM-002 DE 2026 (Manifestación de interés (Menor Cuantía))",
-      "entidad": "Rama Judicial  Dirección Seccional de Administración Judicial de Armenia",
-      "objeto": "Realizar los estudios; diseños; suministro; instalación; legalización y puesta en funcionamiento de sistemas solares fotovoltaicos conectados a la red para los Palacios de Justicia de Armenia y Calarc",
-      "valor": 925393891.0,
+      "numero_proceso": "FGN-NC-IPSE-0027-2026 (Presentación de oferta)",
+      "entidad": "FISCALÍA GENERAL DE LA NACIÓN NIVEL CENTRAL.",
+      "objeto": "ADQUISICIÓN; INSTALACIÓN; Y PUESTA EN FUNCIONAMIENTO DE SISTEMAS DE GENERACIÓN ENERGÉTICA SOLAR FOTOVOLTÁICA PARA LAS SEDES DE LA FISCALÍA GENERAL DE LA NACIÓN A NIVEL NACIONAL - FASE I. (Presentación",
+      "valor": 1447956602.0,
       "fecha_limite": "2026-09-18",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10650622",
-      "region": "Quindío",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10876902",
+      "region": "Distrito Capital de Bogotá",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -69,23 +58,23 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "PN DIRAN SA 025 2026",
-      "entidad": "DIRECCION DE ANTINARCOTICOS",
-      "objeto": "PRESTACIÓN DE SERVICIO PARA LA ACTUALIZACIÒN DE LOS MANUALES TÉCNICOS DE MANTENIMIENTO; MANUALES DE PARTES; MANUALES DE OVERHAUL; MANUALES DE VUELO; SERVICIOS DE INFORMACIÓN Y MISCELÁNEOS; ACTUALIZACI",
-      "valor": 3012629400.0,
-      "fecha_limite": "2026-09-22",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10823607",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
       "numero_proceso": "SAMC-150-CENACAVIACION-2026",
       "entidad": "CENAC AVIACION",
       "objeto": "ADQUISICIÓN DE AIRES ACONDICIONADOS; ADQUISICIÓN E INSTALACIÓN DE ELECTROBOMBAS Y SISTEMAS DE ALMACENAMIENTO Y BOMBEO DE AGUA POTABLE; PARA UNIDADES CENTRALIZADAS POR LA CENACAVIACIÓN",
       "valor": 443500602.0,
       "fecha_limite": "2026-09-22",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10817113",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "PN DIRAN SA 025 2026",
+      "entidad": "DIRECCION DE ANTINARCOTICOS",
+      "objeto": "PRESTACIÓN DE SERVICIO PARA LA ACTUALIZACIÒN DE LOS MANUALES TÉCNICOS DE MANTENIMIENTO; MANUALES DE PARTES; MANUALES DE OVERHAUL; MANUALES DE VUELO; SERVICIOS DE INFORMACIÓN Y MISCELÁNEOS; ACTUALIZACI",
+      "valor": 3012629400.0,
+      "fecha_limite": "2026-09-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10823607",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -114,7 +103,7 @@
     },
     {
       "numero_proceso": "SASI-CIC-9226-407-2026 ",
-      "entidad": "SENA REGIONAL TOLIMA 1",
+      "entidad": "SENA TOLIMA 1",
       "objeto": "ADQUISICIÓN DE EQUIPOS Y MATERIALES FOTOVOLTAICOS",
       "valor": 2414771000.0,
       "fecha_limite": "2026-09-23",
@@ -146,17 +135,6 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "244-00-A-COFAC-CODAF-2026 copia",
-      "entidad": "FUERZA AEROESPACIAL COLOMBIANA",
-      "objeto": "244-00-A-COFAC-CODAF-2026 copia",
-      "valor": 46590820422.0,
-      "fecha_limite": "2026-09-25",
-      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
       "numero_proceso": "LP-CN-002-2026",
       "entidad": "ALCALDIA MUNICIPIO DE CRAVO NORTE",
       "objeto": "ADMINISTRACIÓN; OPERACIÓN Y MANTENIMIENTO DE LAS SOLUCIONES INDIVIDUALES SOLARES FOTOVOLTAICAS PARA LA GENERACION DE ENERGIA ELECTRICA EN ZONA RURAL DISPERSA DEL MUNICIPIO DE CRAVO NORTE; ARAUCA",
@@ -173,9 +151,42 @@
       "objeto": "ADQUISICIÓN AERONAVES NO TRIPULADAS CLASE I; CATEGORÍA 1A PELOTÓN",
       "valor": 4625886599.0,
       "fecha_limite": "2026-10-02",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10867431",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "078-SAMC-DIADQ-ARM-2026",
+      "entidad": "EJERCITO DIRECCION DE ADQUISICIONES",
+      "objeto": "078-SAMC-DIADQ-ARM-2026",
+      "valor": 24600000000.0,
+      "fecha_limite": "2026-10-07",
       "link": "https://community.secop.gov.co/STS/Users/Login/Index",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SDE-LP- 2026-0120",
+      "entidad": "ALCALDIA DISTRITAL DE BUENAVENTURA-VALLE",
+      "objeto": "CONSTRUCCIÓN DE LA CENTRAL DE GENERACIÓN DE ENERGÍA ELÉCTRICA HÍBRIDA (SOLAR-DIÉSEL)",
+      "valor": 1648510798.0,
+      "fecha_limite": "2026-10-08",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Valle del Cauca",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SAM-002 DE 2026 (Manifestación de interés (Menor Cuantía))",
+      "entidad": "Rama Judicial  Dirección Seccional de Administración Judicial de Armenia",
+      "objeto": "Realizar los estudios; diseños; suministro; instalación; legalización y puesta en funcionamiento de sistemas solares fotovoltaicos conectados a la red para los Palacios de Justicia de Armenia y Calarc",
+      "valor": 925393891.0,
+      "fecha_limite": "2026-10-09",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10650622",
+      "region": "Quindío",
+      "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     }
   ]

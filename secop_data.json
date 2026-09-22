@@ -1,37 +1,15 @@
 {
-  "generado": "2026-09-18",
-  "total": 19,
+  "generado": "2026-09-22",
+  "total": 22,
   "procesos": [
     {
-      "numero_proceso": "FGN-NC-IPSE-0027-2026 (Presentación de oferta)",
-      "entidad": "FISCALÍA GENERAL DE LA NACIÓN NIVEL CENTRAL.",
-      "objeto": "ADQUISICIÓN; INSTALACIÓN; Y PUESTA EN FUNCIONAMIENTO DE SISTEMAS DE GENERACIÓN ENERGÉTICA SOLAR FOTOVOLTÁICA PARA LAS SEDES DE LA FISCALÍA GENERAL DE LA NACIÓN A NIVEL NACIONAL - FASE I. (Presentación",
-      "valor": 1447956602.0,
-      "fecha_limite": "2026-09-18",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10876902",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "LP-006-2026 (Fase de Selección (Presentación de ofertas))",
-      "entidad": "GOBERNACION DE SUCRE",
-      "objeto": "CONSTRUCCION DE SOLUCIONES FOTOVOLTAICAS PARA EL SUMINISTRO DE ENERGÍA EN ENTIDADES PUBLICAS DEL MUNICIPIO DE COROZAL; SUCRE (Fase de Selección (Presentación de ofertas))",
-      "valor": 1295615712.0,
-      "fecha_limite": "2026-09-21",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10869823",
-      "region": "Sucre",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SAMC-203-CENACAVIACION2026 (Manifestación de interés (Menor Cuantía))",
-      "entidad": "CENAC AVIACION",
-      "objeto": "SERVICIO DE EXCHANGE - OVERHAUL PARA APU (UNIDAD AUXILIAR DE POTENCIA) DE LAS AERONAVES ANTONOV-32 DEL EJÉRCITO NACIONAL (Manifestación de interés (Menor Cuantía))",
-      "valor": 658977000.0,
-      "fecha_limite": "2026-09-21",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10884451",
-      "region": "Distrito Capital de Bogotá",
+      "numero_proceso": "IP006-2026",
+      "entidad": "EDUP",
+      "objeto": "CONSTRUCCIÓN DE PAVIMENTO RIGlDO QUE VA DESDE EL BOXCOULVER EXISTENTE DESDE LA VIVIENDA DEL SEÑOR TOMAS HASTA EL PUENTE DE LA FUNDACIÓN Y DESDE EL PUENTE DE LA FUNDACIÓN HASTA EL BOXCOUVER QUE VA HAC",
+      "valor": 1205006331.0,
+      "fecha_limite": "2026-09-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10911381",
+      "region": "Arauca",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -47,6 +25,17 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "SAMC-150-CENACAVIACION-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN DE AIRES ACONDICIONADOS; ADQUISICIÓN E INSTALACIÓN DE ELECTROBOMBAS Y SISTEMAS DE ALMACENAMIENTO Y BOMBEO DE AGUA POTABLE; PARA UNIDADES CENTRALIZADAS POR LA CENACAVIACIÓN (Manifestación d",
+      "valor": 443500602.0,
+      "fecha_limite": "2026-09-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10914160",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "PN DIRAN SA 025 2026",
       "entidad": "DIRECCION DE ANTINARCOTICOS",
       "objeto": "PRESTACIÓN DE SERVICIO PARA LA ACTUALIZACIÒN DE LOS MANUALES TÉCNICOS DE MANTENIMIENTO; MANUALES DE PARTES; MANUALES DE OVERHAUL; MANUALES DE VUELO; SERVICIOS DE INFORMACIÓN Y MISCELÁNEOS; ACTUALIZACI",
@@ -58,25 +47,14 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "SAMC-150-CENACAVIACION-2026",
+      "numero_proceso": "SAMC-203-CENACAVIACION2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
       "entidad": "CENAC AVIACION",
-      "objeto": "ADQUISICIÓN DE AIRES ACONDICIONADOS; ADQUISICIÓN E INSTALACIÓN DE ELECTROBOMBAS Y SISTEMAS DE ALMACENAMIENTO Y BOMBEO DE AGUA POTABLE; PARA UNIDADES CENTRALIZADAS POR LA CENACAVIACIÓN",
-      "valor": 443500602.0,
+      "objeto": "SERVICIO DE EXCHANGE - OVERHAUL PARA APU (UNIDAD AUXILIAR DE POTENCIA) DE LAS AERONAVES ANTONOV-32 DEL EJÉRCITO NACIONAL (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
+      "valor": 658977000.0,
       "fecha_limite": "2026-09-22",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10817113",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10911190",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SASI-CIC-9226-407-2026 ",
-      "entidad": "SENA TOLIMA 1",
-      "objeto": "ADQUISICIÓN DE EQUIPOS Y MATERIALES FOTOVOLTAICOS",
-      "valor": 2414771000.0,
-      "fecha_limite": "2026-09-23",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10849906",
-      "region": "Tolima",
-      "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
     {
@@ -87,6 +65,17 @@
       "fecha_limite": "2026-09-23",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10820151",
       "region": "Arauca",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASI-CIC-9226-407-2026  (Presentación de oferta)",
+      "entidad": "SENA TOLIMA 1",
+      "objeto": "ADQUISICIÓN DE EQUIPOS Y MATERIALES FOTOVOLTAICOS (Presentación de oferta)",
+      "valor": 2414771000.0,
+      "fecha_limite": "2026-09-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10911187",
+      "region": "Tolima",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -124,14 +113,25 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "LP-CN-002-2026",
+      "numero_proceso": "LP-CN-002-2026 (Presentación de oferta)",
       "entidad": "ALCALDIA MUNICIPIO DE CRAVO NORTE",
-      "objeto": "ADMINISTRACIÓN; OPERACIÓN Y MANTENIMIENTO DE LAS SOLUCIONES INDIVIDUALES SOLARES FOTOVOLTAICAS PARA LA GENERACION DE ENERGIA ELECTRICA EN ZONA RURAL DISPERSA DEL MUNICIPIO DE CRAVO NORTE; ARAUCA",
+      "objeto": "ADMINISTRACIÓN; OPERACIÓN Y MANTENIMIENTO DE LAS SOLUCIONES INDIVIDUALES SOLARES FOTOVOLTAICAS PARA LA GENERACION DE ENERGIA ELECTRICA EN ZONA RURAL DISPERSA DEL MUNICIPIO DE CRAVO NORTE; ARAUCA (Pres",
       "valor": 5754262767.0,
       "fecha_limite": "2026-09-30",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10824584",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10925602",
       "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SGD-SASI-024-2026",
+      "entidad": "GOBERNACIÓN DEPARTAMENTO DEL PUTUMAYO",
+      "objeto": "CONTRATO DE SUMINISTRO - EQUIPOS TECONOLOGICOS AERONAVES NO TRIPULADAS",
+      "valor": 749785536.0,
+      "fecha_limite": "2026-10-01",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10919194",
+      "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {
@@ -154,6 +154,17 @@
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10892386",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASD-215- CENACAVIACION-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "SERVICIOS DE REPARACIÓN DE COMPONENTES MAYORES Y REPUESTOS PARA LOS HELICÓPTEROS MI-17 DE LA AVIACIÓN DE EJÉRCITO NACIONAL DE COLOMBIA",
+      "valor": 13728063220.0,
+      "fecha_limite": "2026-10-06",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {
@@ -209,6 +220,28 @@
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10903135",
       "region": "Valle del Cauca",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LOP-EICE-AMV-001-2026",
+      "entidad": "EMPRESA INDUSTRIAL Y COMERCIAL DEL ESTADO AREA METROPOLITANA DE VALLEDUPAR E.I.C.E. AMV",
+      "objeto": "INSTALACIÓN DE SISTEMAS DE ENERGÍA SOLAR FOTOVOLTAICA EN ZONAS NO INTERCONECTADA",
+      "valor": 9443936281.0,
+      "fecha_limite": "2026-10-13",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10914544",
+      "region": "Arauca",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LP-058-2026.",
+      "entidad": "ALCALDIA MUNICIPIO DE DOSQUEBRADAS",
+      "objeto": "ADQUIRIR VEHÍCULO Y SISTEMA DE AERONAVES NO TRIPULADAS (SIART); JUNTO CON LOS BIENES; EQUIPOS; ACCESORIOS; SOFTWARE Y SERVICIOS NECESARIOS PARA SU OPERACIÓN Y SOPORTE TÉCNICO; DESTINADOS AL FORTALECI",
+      "valor": 1700000000.0,
+      "fecha_limite": "2026-10-28",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Risaralda",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     }
   ]

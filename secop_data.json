@@ -1,102 +1,14 @@
 {
-  "generado": "2026-09-22",
-  "total": 22,
+  "generado": "2026-09-25",
+  "total": 16,
   "procesos": [
     {
-      "numero_proceso": "IP006-2026",
-      "entidad": "EDUP",
-      "objeto": "CONSTRUCCIÓN DE PAVIMENTO RIGlDO QUE VA DESDE EL BOXCOULVER EXISTENTE DESDE LA VIVIENDA DEL SEÑOR TOMAS HASTA EL PUENTE DE LA FUNDACIÓN Y DESDE EL PUENTE DE LA FUNDACIÓN HASTA EL BOXCOUVER QUE VA HAC",
-      "valor": 1205006331.0,
-      "fecha_limite": "2026-09-22",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10911381",
-      "region": "Arauca",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SAMC-ATL-CIA-031-2026",
-      "entidad": "SENA REGIONAL ATLANTICO Intercentros",
-      "objeto": "MANTENIMIENTO AVIACION",
-      "valor": 444149906.0,
-      "fecha_limite": "2026-09-22",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10832191",
-      "region": "Atlántico",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SAMC-150-CENACAVIACION-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
-      "entidad": "CENAC AVIACION",
-      "objeto": "ADQUISICIÓN DE AIRES ACONDICIONADOS; ADQUISICIÓN E INSTALACIÓN DE ELECTROBOMBAS Y SISTEMAS DE ALMACENAMIENTO Y BOMBEO DE AGUA POTABLE; PARA UNIDADES CENTRALIZADAS POR LA CENACAVIACIÓN (Manifestación d",
-      "valor": 443500602.0,
-      "fecha_limite": "2026-09-23",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10914160",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "PN DIRAN SA 025 2026",
-      "entidad": "DIRECCION DE ANTINARCOTICOS",
-      "objeto": "PRESTACIÓN DE SERVICIO PARA LA ACTUALIZACIÒN DE LOS MANUALES TÉCNICOS DE MANTENIMIENTO; MANUALES DE PARTES; MANUALES DE OVERHAUL; MANUALES DE VUELO; SERVICIOS DE INFORMACIÓN Y MISCELÁNEOS; ACTUALIZACI",
-      "valor": 3012629400.0,
-      "fecha_limite": "2026-09-22",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10823607",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SAMC-203-CENACAVIACION2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
-      "entidad": "CENAC AVIACION",
-      "objeto": "SERVICIO DE EXCHANGE - OVERHAUL PARA APU (UNIDAD AUXILIAR DE POTENCIA) DE LAS AERONAVES ANTONOV-32 DEL EJÉRCITO NACIONAL (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
-      "valor": 658977000.0,
-      "fecha_limite": "2026-09-22",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10911190",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "ARI.LP-021-2026",
-      "entidad": "ARAUCA ILUMINADA SAS ESP",
-      "objeto": "IMPLEMENTACIÓN DE SISTEMAS DE ENERGÍA FOTOVOLTAICA EN INSTITUCIONES EDUCATIVAS DEL MUNICIPIO DE TAME; DEPARTAMENTO DE ARAUCA",
-      "valor": 5669365005.0,
-      "fecha_limite": "2026-09-23",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10820151",
-      "region": "Arauca",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SASI-CIC-9226-407-2026  (Presentación de oferta)",
-      "entidad": "SENA TOLIMA 1",
-      "objeto": "ADQUISICIÓN DE EQUIPOS Y MATERIALES FOTOVOLTAICOS (Presentación de oferta)",
-      "valor": 2414771000.0,
-      "fecha_limite": "2026-09-23",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10911187",
-      "region": "Tolima",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SAMC-118-CENACAVIACIÓN-2026",
-      "entidad": "CENAC AVIACION",
-      "objeto": "ADQUISICIÓN DE REPUESTOS PARA EL MANTENIMIENTO DE EQUIPOS FARE; TANQUES FIJOS Y CARROTANQUES DE SUMINISTRO COMBUSTIBLES DE AVIACIÓN",
-      "valor": 374471275.0,
-      "fecha_limite": "2026-09-23",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10809901",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SAMC009-2026",
+      "numero_proceso": "SAMC009-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
       "entidad": "GOBERNACION DE NARIÑO",
-      "objeto": "SELECCIÓN ABREVIADA DE MENOR CUANTIA- ANTENAS",
+      "objeto": "SELECCIÓN ABREVIADA DE MENOR CUANTIA- ANTENAS (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
       "valor": 449808684.0,
       "fecha_limite": "2026-09-25",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10810039",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10916805",
       "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
@@ -157,17 +69,6 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "SASD-215- CENACAVIACION-2026",
-      "entidad": "CENAC AVIACION",
-      "objeto": "SERVICIOS DE REPARACIÓN DE COMPONENTES MAYORES Y REPUESTOS PARA LOS HELICÓPTEROS MI-17 DE LA AVIACIÓN DE EJÉRCITO NACIONAL DE COLOMBIA",
-      "valor": 13728063220.0,
-      "fecha_limite": "2026-10-06",
-      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
       "numero_proceso": "076-00-J-EMAVI-GRUAL-2026",
       "entidad": "EMAVI",
       "objeto": "OBRA PÚBLICA PARA EL MANTENIMIENTO Y ADECUACIÓN DE LOS ALOJAMIENTOS DE CADETES DE LA ESCUELA MILITAR DE AVIACIÓN",
@@ -196,6 +97,17 @@
       "valor": 888215000.0,
       "fecha_limite": "2026-10-07",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10903259",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001128 H3 DE 2026 A",
+      "entidad": "AEROCIVIL",
+      "objeto": "RADIOAYUDAS (NUEVO)",
+      "valor": 789642789.0,
+      "fecha_limite": "2026-10-09",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10930462",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -230,6 +142,28 @@
       "fecha_limite": "2026-10-13",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10914544",
       "region": "Arauca",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASD-215- CENACAVIACION-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "SERVICIOS DE REPARACIÓN DE COMPONENTES MAYORES Y REPUESTOS PARA LOS HELICÓPTEROS MI-17 DE LA AVIACIÓN DE EJÉRCITO NACIONAL DE COLOMBIA",
+      "valor": 13728063220.0,
+      "fecha_limite": "2026-10-14",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10933921",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SA-CARDIQUE-021- 2026",
+      "entidad": "CORPORACIÓN AUTÓNOMA REGIONAL DEL CANAL DEL DIQUE",
+      "objeto": "IMPLEMENTACIÓN DE UN SISTEMA DE ENERGIAS RENOVABLES COMO INSUMO DE PRODUCCIÓN Y LA MITIGACIÓN DE EMISIONES DE GASES EFECTO INVERNADERO (GEI) EN LOCALIDADES DE LA JURISDICCION DE CARDIQUE QUE REALIZAN",
+      "valor": 490211835.0,
+      "fecha_limite": "2026-10-14",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10937956",
+      "region": "Bolívar",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },

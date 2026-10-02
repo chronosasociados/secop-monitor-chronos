@@ -1,29 +1,7 @@
 {
-  "generado": "2026-09-29",
-  "total": 17,
+  "generado": "2026-10-02",
+  "total": 18,
   "procesos": [
-    {
-      "numero_proceso": "LP-CN-002-2026",
-      "entidad": "ALCALDIA MUNICIPIO DE CRAVO NORTE",
-      "objeto": "ADMINISTRACIÓN; OPERACIÓN Y MANTENIMIENTO DE LAS SOLUCIONES INDIVIDUALES SOLARES FOTOVOLTAICAS PARA LA GENERACION DE ENERGIA ELECTRICA EN ZONA RURAL DISPERSA DEL MUNICIPIO DE CRAVO NORTE; ARAUCA",
-      "valor": 5754262767.0,
-      "fecha_limite": "2026-09-30",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10824584",
-      "region": "Arauca",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SGD-SASI-024-2026",
-      "entidad": "GOBERNACIÓN DEPARTAMENTO DEL PUTUMAYO",
-      "objeto": "CONTRATO DE SUMINISTRO - EQUIPOS TECONOLOGICOS AERONAVES NO TRIPULADAS",
-      "valor": 749785536.0,
-      "fecha_limite": "2026-10-01",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10919194",
-      "region": "Arauca",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
     {
       "numero_proceso": "SASD-220-CENACAVIACIÓN-2026",
       "entidad": "CENAC AVIACION",
@@ -31,6 +9,17 @@
       "valor": 4625886599.0,
       "fecha_limite": "2026-10-02",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10867431",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "244-00-A-COFAC-CODAF-2026 (Presentación de oferta)",
+      "entidad": "FUERZA AEROESPACIAL COLOMBIANA",
+      "objeto": "SUMINISTRO DE COMBUSTIBLE DE AVIACIÓN PARA LAS AERONAVES DE LA FUERZA PÚBLICA; DEL ESTADO Y DEMÁS ENTIDADES CON LAS CUALES SE TENGAN CONVENIOS; CONTRATOS; ACUERDOS O QUE PRESTEN SUS SERVICIOS O ESTÉN",
+      "valor": 46590820422.0,
+      "fecha_limite": "2026-10-05",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10977395",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -47,12 +36,23 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "SAMC-214-CENACAVIACION-2026",
+      "numero_proceso": "078-SAMC-DIADQ-ARM-2026",
+      "entidad": "EJERCITO DIRECCION DE ADQUISICIONES",
+      "objeto": "078-SAMC-DIADQ-ARM-2026",
+      "valor": 24600000000.0,
+      "fecha_limite": "2026-10-07",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10900181",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SAMC-214-CENACAVIACION-2026 (Manifestación de interés (Menor Cuantía)) (Presentación de oferta)",
       "entidad": "CENAC AVIACION",
-      "objeto": "PRESTACIÓN DE SERVICIOS DE ENTRENAMIENTO EN SIMULADOR RECURRENTE PARA AERONAVES DE ALA FIJA DE FABRICACIÓN AMERICANA (B200 BEECHCRAFT G-1000)",
+      "objeto": "PRESTACIÓN DE SERVICIOS DE ENTRENAMIENTO EN SIMULADOR RECURRENTE PARA AERONAVES DE ALA FIJA DE FABRICACIÓN AMERICANA (B200 BEECHCRAFT G-1000) (Manifestación de interés (Menor Cuantía)) (Presentación d",
       "valor": 888215000.0,
       "fecha_limite": "2026-10-07",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10903259",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10982061",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -65,17 +65,6 @@
       "fecha_limite": "2026-10-07",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10897389",
       "region": "Valle del Cauca",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "078-SAMC-DIADQ-ARM-2026",
-      "entidad": "EJERCITO DIRECCION DE ADQUISICIONES",
-      "objeto": "078-SAMC-DIADQ-ARM-2026",
-      "valor": 24600000000.0,
-      "fecha_limite": "2026-10-07",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10900181",
-      "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -102,6 +91,17 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "SDE-LP- 2026-0120 (Fase de Selección (Presentación de ofertas))",
+      "entidad": "ALCALDIA DISTRITAL DE BUENAVENTURA-VALLE",
+      "objeto": "CONSTRUCCIÓN DE LA CENTRAL DE GENERACIÓN DE ENERGÍA ELÉCTRICA HÍBRIDA (SOLAR-DIÉSEL) (Fase de Selección (Presentación de ofertas))",
+      "valor": 1648510798.0,
+      "fecha_limite": "2026-10-09",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10980658",
+      "region": "Valle del Cauca",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001128 H3 DE 2026 A",
       "entidad": "AEROCIVIL",
       "objeto": "RADIOAYUDAS (NUEVO)",
@@ -120,17 +120,6 @@
       "fecha_limite": "2026-10-09",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10650622",
       "region": "Quindío",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SDE-LP- 2026-0120",
-      "entidad": "ALCALDIA DISTRITAL DE BUENAVENTURA-VALLE",
-      "objeto": "CONSTRUCCIÓN DE LA CENTRAL DE GENERACIÓN DE ENERGÍA ELÉCTRICA HÍBRIDA (SOLAR-DIÉSEL)",
-      "valor": 1648510798.0,
-      "fecha_limite": "2026-10-09",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10903135",
-      "region": "Valle del Cauca",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -176,6 +165,28 @@
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10947128",
       "region": "Arauca",
       "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASD-208-CENACAVIACION-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN DE REPUESTOS APLICABLES A LOS HELICÓPTEROS MI-17 DE LA AVIACIÓN DE EJÉRCITO NACIONAL DE COLOMBIA",
+      "valor": 5572859762.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SASD-211-CENACAVIACION-2026",
+      "entidad": "CENAC AVIACION",
+      "objeto": "ADQUISICIÓN DE REPUESTOS GENERALES Y PALAS DE ROTOR PRINCIPAL PARA LOS HELICOPTEROS (UH-60L/S70i) DE LA AVIACION DEL EJERCITO NACIONAL",
+      "valor": 7389246150.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/STS/Users/Login/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {

@@ -4,45 +4,35 @@ Monitor de procesos SECOP II para Chronos Asociados
 =====================================================
 
 Consulta el dataset abierto oficial "SECOP II - Procesos de Contratación"
-(Colombia Compra Eficiente, vía datos.gov.co / Socrata) y filtra los procesos
-que están ACTUALMENTE ABIERTOS (fecha límite de respuesta aún no vencida) y
-que cumplen los criterios de Chronos Asociados:
+(Colombia Compra Eficiente, vía datos.gov.co / Socrata) y reporta los procesos
+VIGENTES que cumplan CUALQUIERA de estos dos criterios independientes:
 
-    - Sector: dos grupos de búsqueda independientes —
-        (1) TODO lo publicado por la Aeronáutica Civil / Aerocivil (sin
-            importar las palabras del título — se busca por la entidad
-            misma), más cualquier otro proceso de cualquier entidad
-            relacionado con aeronáutica/aviación
-        (2) cualquier proceso de energía solar o energías limpias/verdes/
-            alternativas/renovables en general (fotovoltaica, paneles,
-            bombas, sistemas, luminarias solares, energía limpia, energía
-            verde, energía alternativa, energía renovable, energía
-            sostenible, etc.), publicado por cualquier entidad del país
-    - Valor mínimo: $350.000.000 COP
-    - Alcance: TODO el país, sin límite a ninguna región — clasificado por
-      departamento (no por macro-región) para que no se quede nada por fuera
+  1. AERONÁUTICA CIVIL — todos los procesos publicados por la Unidad
+     Administrativa Especial de Aeronáutica Civil, identificada por su NIT
+     899999059. Se busca por NIT, no por palabras clave.
 
-Este script está pensado para correr en un entorno con acceso normal a
-internet (tu propio computador, un servidor, GitHub Actions, PythonAnywhere,
-etc.) — NO dentro del sandbox de Claude, cuyo acceso a redes externas está
-restringido. En producción corre vía GitHub Actions, los martes y viernes.
+  2. ENERGÍA SOLAR Y ALTERNATIVAS — procesos de CUALQUIER entidad del país
+     relacionados con paneles solares, energía solar/fotovoltaica y energías
+     alternativas o similares (limpia, verde, renovable, sostenible, eólica,
+     biomasa, etc.). Se busca por palabras clave en el nombre y la descripción.
+
+"Vigente" significa: fecha límite de recepción aún no vencida Y el proceso no
+figura como adjudicado, cancelado, suspendido, desierto o terminado.
+
+Este script corre en un entorno con acceso normal a internet (GitHub Actions,
+tu computador, un servidor) — NO dentro del sandbox de Claude. En producción
+corre vía GitHub Actions, los martes y viernes.
 
 Uso:
     pip install requests
-    python secop_monitor.py                # imprime el resumen en pantalla
+    python secop_monitor.py                 # imprime el resumen en pantalla
     python secop_monitor.py --json out.json # además guarda el JSON crudo
 
-Para que además ENVÍE el correo (esto es lo que hace GitHub Actions todos los
-días), define estas tres variables de entorno antes de correrlo:
-
-    GMAIL_ADDRESS       la cuenta de Gmail que envía el correo
-    GMAIL_APP_PASSWORD  una "contraseña de aplicación" de esa cuenta (NO la
-                         contraseña normal de Gmail — se genera en
-                         https://myaccount.google.com/apppasswords)
-    DEST_EMAIL          a quién se le envía (p.ej. chronos.asociados@gmail.com)
-
-Si esas variables no están definidas, el script simplemente imprime el
-resumen en pantalla y no intenta enviar nada (útil para probar en local).
+Para que además ENVÍE el correo define estas variables de entorno:
+    GMAIL_ADDRESS        cuenta de Gmail que envía
+    GMAIL_APP_PASSWORD   "contraseña de aplicación" (no la clave normal)
+    DEST_EMAIL           a quién se le envía
+Si no están definidas, solo imprime (útil para probar en local).
 """
 
 import argparse
@@ -50,233 +40,395 @@ import datetime
 import html
 import json
 import os
+import re
 import smtplib
 import sys
+import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from zoneinfo import ZoneInfo
 
 import requests
 
 DATASET_URL = "https://www.datos.gov.co/resource/p6dx-8zbt.json"
+URL_BUSQUEDA_SECOP = "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index"
+
+# Etiquetas que espera la app de Base44 (no cambiar el texto).
+CAT_AEROCIVIL = "Aeronáutica Civil"
+CAT_SOLAR = "Energía Solar Fotovoltaica"
 
 # ---------------------------------------------------------------------------
 # Criterios de búsqueda (ajusta aquí si cambian)
 # ---------------------------------------------------------------------------
 
-# Dos grupos de búsqueda INDEPENDIENTES (un proceso entra si cumple con
-# cualquiera de los dos, no hace falta que cumpla ambos):
-#
-#   1. Aeronáutica civil: por palabra clave EN CUALQUIER ENTIDAD, más TODO lo
-#      publicado por la Aeronáutica Civil / Aerocivil sin importar palabras.
-#   2. Energía solar / energías limpias en general: por palabra clave, en
-#      cualquier entidad del país. Aquí no hay una sola entidad "dueña" del
-#      tema (publican municipios, gobernaciones, ENELAR, IPSE, etc.), así que
-#      la ampliación es de vocabulario, no de entidad.
-#
-# Las palabras se escriben aquí CON sus tildes correctas en español; el
-# código genera automáticamente también la versión sin tilde (ver
-# _variantes_sin_tilde más abajo) y compara todo sin distinguir mayúsculas ni
-# tildes, porque el dataset de SECOP no es consistente: algunos registros
-# traen "aeronáutica" y otros "aeronautica". Así no se pierde ningún proceso
-# solo porque a un funcionario se le olvidó una tilde.
-PALABRAS_AERONAUTICA = [
-    "AERONÁUTIC",  # aeronáutica / aeronáutico
-    "AERONAVE",
-    "AEROPUERTO",
-    "AERÓDROMO",
-    "AVIACIÓN",
-    "HELIPUERTO",
-    "NAVEGACIÓN AÉREA",
+# Criterio 1: Aerocivil, por NIT 899999059 (tal como viene en el dataset).
+NIT_AEROCIVIL = "899999059"
+
+# Valor mínimo (precio base, COP) por criterio. 0 = sin mínimo.
+VALOR_MINIMO_AEROCIVIL = 0
+VALOR_MINIMO_SOLAR = 500_000_000
+
+# Criterio 2: pre-filtro AMPLIO que se envía al servidor (SoQL no distingue
+# tildes ni límites de palabra, así que aquí se prefiere no perder nada).
+# Luego Python aplica el filtro preciso (ver PATRONES_SOLAR_FUERTES).
+PREFILTRO_SOLAR = [
+    "%SOLAR%",
+    "%FOTOVOLTAIC%",
+    "%ENERG%LIMPIA%",
+    "%ENERG%VERDE%",
+    "%ENERG%ALTERN%",
+    "%ENERG%RENOVABLE%",
+    "%ENERG%SOSTENIBLE%",
+    "%ENERG%CONVENCIONAL%",
+    "%FUENTE%RENOVABLE%",
+    "%EOLIC%",
+    "%EÓLIC%",
+    "%AEROGENERADOR%",
+    "%FNCER%",
+    "%BIOMASA%",
+    "%BIOGAS%",
+    "%BIOGÁS%",
+    "%GEOTERMIC%",
+    "%GEOTÉRMIC%",
+    "%HIDROGENO%VERDE%",
+    "%HIDRÓGENO%VERDE%",
 ]
 
-# "SOLAR" solo (sin exigir que venga acompañada de "fotovoltaica" o "energía")
-# para no perder variantes como "bombas solares", "paneles solares",
-# "luminarias solares", "sistemas solares", "calentadores solares", etc.
-# Nota: "solar" en español también puede significar "lote de terreno" (poco
-# común en SECOP, pero puede colar algún proceso de compra de terreno que no
-# es de energía — se puede ajustar si genera demasiado ruido).
-# También se incluyen términos más amplios de energía limpia/verde/alternativa
-# por si el proceso no usa la palabra "solar" ni "fotovoltaica" directamente
-# (p.ej. "energías renovables", "energía limpia", "energía verde").
-PALABRAS_SOLAR = [
-    "FOTOVOLTAIC",
-    "SOLAR",
-    "ENERGÍA LIMPIA",
-    "ENERGÍA VERDE",
-    "ENERGÍA ALTERNATIVA",
-    "ENERGÍA RENOVABLE",
-    "ENERGÍAS RENOVABLES",
-    "ENERGÍA SOSTENIBLE",
+# Filtro preciso (sobre texto SIN tildes y en mayúsculas, con límites de
+# palabra). "SOLARWINDS" ya NO coincide con "SOLAR".
+_ENERGIA = r"ENERGI(?:A|AS)"
+_TIPOS_ENERGIA = (
+    r"(?:SOLAR(?:ES)?|LIMPIAS?|VERDES?|ALTERNATIVAS?|ALTERNAS?|RENOVABLES?|"
+    r"SOSTENIBLES?|EOLICAS?|NO\s+CONVENCIONALES?)"
+)
+PATRONES_SOLAR_FUERTES = [
+    re.compile(p)
+    for p in (
+        r"\bFOTOVOLTAIC\w*",
+        r"\bPANEL(?:ES)?\s+(?:\w+\s+){0,2}SOLAR(?:ES)?\b",
+        rf"\b{_ENERGIA}\s+(?:\w+\s+){{0,2}}{_TIPOS_ENERGIA}\b",
+        r"\bFUENTES?\s+(?:\w+\s+){0,2}RENOVABLES?\b",
+        r"\bFUENTES?\s+NO\s+CONVENCIONALES?\b",
+        r"\bFNCER\b",
+        r"\bEOLIC\w*",
+        r"\bAEROGENERADOR\w*",
+        r"\bBIOMASA\b",
+        r"\bBIOGAS\b",
+        r"\bGEOTERMIC\w*",
+        r"\bHIDROGENO\s+VERDE\b",
+        r"\bTERMOSOLAR\w*",
+        r"\bSISTEMAS?\s+(?:\w+\s+){0,3}SOLAR(?:ES)?\b",
+    )
+]
+# "SOLAR" suelto es ambiguo (también significa "lote de terreno"): se acepta si
+# hay contexto de energía; se rechaza si solo hay contexto de terreno.
+_RE_SOLAR_SUELTO = re.compile(r"\bSOLAR(?:ES)?\b")
+_CONTEXTO_ENERGIA = (
+    "ENERG", "PANEL", "FOTOVOLT", "ELECTR", "BOMBE", "LUMINARIA", "ALUMBRADO",
+    "ILUMINAC", "CALENTADOR", "GENERAC", "INVERSOR", "CELDA", "LAMPARA", "KW",
+    "SISTEMA",
+)
+_CONTEXTO_TERRENO = ("LOTE", "TERRENO", "PREDIO", "INMUEBLE", "FINCA", "URBANIZ", "CASA ")
+
+# Departamentos de interés, en el orden en que se muestran en el correo
+# (Arauca primero). Los demás departamentos salen después, en orden alfabético.
+DEPARTAMENTOS_PRIORITARIOS = [
+    "Arauca", "Vichada", "Casanare", "Guaviare", "Guainía", "Meta",
+    "Boyacá", "Santander", "Norte de Santander", "Cundinamarca",
 ]
 
-PALABRAS_CLAVE = PALABRAS_AERONAUTICA + PALABRAS_SOLAR
-
-# Entidades cuyos procesos se traen TODOS, sin importar si el título/objeto
-# menciona alguna de las palabras clave de arriba — así no se pierde ningún
-# proceso publicado por Aerocivil aunque esté redactado de forma genérica
-# (p.ej. "Adquisición de repuestos", "Prestación de servicios de aseo", etc.).
-# Esto aplica SOLO al grupo de aeronáutica civil: no existe un equivalente
-# para energía solar porque no hay una única entidad que la publique.
-ENTIDADES_CLAVE = [
-    "AERONÁUTICA CIVIL",
-    "AEROCIVIL",
-]
-
-VALOR_MINIMO = 350_000_000
-
-# Municipios "ancla": si el título/objeto/ciudad del proceso menciona uno de
-# estos municipios, se clasifica en ese departamento aunque la entidad que
-# publica el proceso esté registrada en otro (esto pasa mucho con Aerocivil,
-# que administra aeropuertos regionales pero aparece registrada en Bogotá).
+# Anclas de ubicación: municipios, aeropuertos y nombres del departamento. SOLO
+# se usan para entidades NACIONALES (o registradas en Bogotá, como Aerocivil),
+# que ejecutan obras en regiones. Las entidades territoriales (gobernaciones,
+# alcaldías, etc.) siempre usan su propio departamento. La coincidencia es por
+# palabra completa y gana la ancla que aparece primero en el texto.
+# Se evitaron nombres ambiguos ("Meta" suelto, "Vanguardia", "Miraflores"...).
+# Aeropuertos tomados del listado de aeropuertos de Colombia; complétalo si falta alguno.
 MUNICIPIOS_POR_DEPARTAMENTO = {
-    "Arauca": ["Arauca", "Arauquita", "Cravo Norte", "Fortul", "Puerto Rondón", "Saravena", "Tame"],
-    # Agrega aquí más municipios "ancla" de otros departamentos si te interesa
-    # detectarlos por nombre de ciudad/aeropuerto en el texto del proceso.
+    "Arauca": [
+        "Arauca", "Arauquita", "El Troncal", "Cravo Norte", "Fortul", "Puerto Rondón", "Saravena",
+        "Tame", "Santiago Pérez", "Los Colonizadores", "Gustavo Vargas",
+    ],
+    "Vichada": ["Vichada", "Puerto Carreño", "Germán Olano", "Cumaribo"],
+    "Casanare": ["Casanare", "Yopal", "El Alcaraván", "Paz de Ariporo", "Támara", "Trinidad", "Hato Corozal"],
+    "Guaviare": ["Guaviare", "San José del Guaviare", "Jorge Enrique González", "El Retorno"],
+    "Guainía": ["Guainía", "Inírida", "César Gaviria Trujillo"],
+    "Meta": [
+        "Departamento del Meta", "(Meta)", "Villavicencio", "Aeropuerto Vanguardia", "San Martín de los Llanos",
+        "Aeropuerto San Martín", "La Macarena", "Puerto Gaitán", "Mapiripán", "Puerto López",
+    ],
+    "Boyacá": ["Boyacá", "Tunja", "Paipa", "Duitama", "Sogamoso", "Puerto Boyacá"],
+    "Santander": [
+        "Departamento de Santander", "(Santander)", "Bucaramanga", "Palonegro", "Lebrija", "Barrancabermeja",
+        "Yariguíes", "San Gil", "Floridablanca", "Piedecuesta", "Girón", "Cimitarra",
+    ],
+    "Norte de Santander": [
+        "Norte de Santander", "Cúcuta", "Camilo Daza", "Ocaña", "Aguas Claras", "Tibú", "Pamplona",
+        "Villa del Rosario",
+    ],
+    "Cundinamarca": [
+        "Cundinamarca", "Girardot", "Santiago Vila", "Guaymaral", "Facatativá", "Zipaquirá", "Fusagasugá", "Soacha",
+    ],
 }
 
-_MAPA_TILDES = {"Á": "A", "É": "E", "Í": "I", "Ó": "O", "Ú": "U", "Ñ": "N", "Ü": "U"}
+# ---------------------------------------------------------------------------
+# Utilidades de texto
+# ---------------------------------------------------------------------------
+
+_MAPA_TILDES = str.maketrans("ÁÉÍÓÚÜÑ", "AEIOUUN")
 
 
-def _quitar_tildes(texto: str) -> str:
-    """Quita tildes (y upper-case) para poder comparar sin importar si el
-    texto original las trae o no — el dataset de SECOP es inconsistente en
-    esto, y NO queremos perder un proceso solo por una tilde de más o de
-    menos."""
-    texto = texto.upper()
-    return "".join(_MAPA_TILDES.get(c, c) for c in texto)
+def _norm(texto) -> str:
+    """Mayúsculas y sin tildes (conserva el largo del texto)."""
+    return (texto or "").upper().translate(_MAPA_TILDES)
 
 
-def _variantes_sin_tilde(palabra: str) -> list[str]:
-    """Para una palabra clave (posiblemente con tildes), devuelve la lista de
-    variantes a buscar: la original y, si es distinta, la versión sin tildes.
-    Se usa para armar el $where de SoQL, que compara texto literal y no
-    puede "ignorar" tildes por sí solo."""
-    sin_tilde = _quitar_tildes(palabra)
-    if sin_tilde == palabra.upper():
-        return [palabra.upper()]
-    return [palabra.upper(), sin_tilde]
+# El dataset pega al número y al nombre del proceso el texto de la fase, p.ej.
+# "SDE-LP-2026-0120 (Fase de Selección (Presentación de ofertas))", y a veces
+# lo corta a mitad de palabra. Se corta desde el primer paréntesis que abre con
+# una palabra de fase.
+_RE_FASE = re.compile(
+    r"\s*\(\s*(?:MANIFESTACI|PRESENTACI|FASE\b|EVALUACI|PLANEACI|SELECCI|BORRADOR|MENOR CUANT|INVITACI)"
+)
 
 
-def construir_where(fecha_min_iso: str) -> str:
-    """Arma la cláusula $where de SoQL: (sector por palabra clave EN CUALQUIER
-    ENTIDAD, con y sin tildes) OR (cualquier proceso publicado por
-    Aerocivil/Aeronáutica Civil, sin exigir palabra clave) + valor mínimo +
-    aún abierto."""
+def limpiar_fase(texto) -> str:
+    t = (texto or "").strip()
+    m = _RE_FASE.search(_norm(t))
+    if m:
+        t = t[: m.start()]
+    return t.strip(" -–—.;:,")
+
+
+_NOMBRES_GENERICOS = {
+    "SUBASTA INVERSA", "SUBASTA INVERSA ELECTRONICA", "LICITACION PUBLICA",
+    "SELECCION ABREVIADA", "CONTRATACION DIRECTA", "CONCURSO DE MERITOS",
+    "MINIMA CUANTIA", "MENOR CUANTIA", "INVITACION PUBLICA",
+}
+
+
+def _referencia(p: dict) -> str:
+    return limpiar_fase(p.get("referencia_del_proceso") or p.get("id_del_proceso")) or "(sin número)"
+
+
+def objeto_y_detalle(p: dict) -> tuple[str, str]:
+    """(objeto principal, detalle). Si el nombre es genérico o es solo el
+    número del proceso, el objeto real está en la descripción."""
+    nombre = limpiar_fase(p.get("nombre_del_procedimiento"))
+    desc = limpiar_fase(p.get("descripci_n_del_procedimiento"))
+    ref_n = _norm(_referencia(p))
+    nombre_n = _norm(nombre)
+    generico = (not nombre) or nombre_n == ref_n or nombre_n in _NOMBRES_GENERICOS
+    principal = desc if (generico and desc) else (nombre or desc)
+    detalle = ""
+    if desc and _norm(desc)[:60] != _norm(principal)[:60]:
+        detalle = desc
+    if len(detalle) > 300:
+        detalle = detalle[:297].rstrip() + "..."
+    return principal, detalle
+
+
+def _url_proceso(p: dict) -> str:
+    u = p.get("urlproceso")
+    if isinstance(u, dict):
+        u = u.get("url", "")
+    u = (u or "").strip()
+    if not u or "/Users/Login" in u:  # algunos procesos traen la página de login
+        return ""
+    return u
+
+
+def _valor(p: dict) -> float:
+    try:
+        return float(p.get("precio_base") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _fmt_cop(v: float) -> str:
+    return "No informado" if not v else "$" + f"{int(v):,}".replace(",", ".")
+
+
+def _texto_proceso(p: dict) -> str:
+    return _norm(
+        " ".join([p.get("nombre_del_procedimiento") or "", p.get("descripci_n_del_procedimiento") or ""])
+    )
+
+
+# ---------------------------------------------------------------------------
+# Consulta al dataset
+# ---------------------------------------------------------------------------
+
+LIMITE_PAGINA = 500
+MAX_PAGINAS = 6
+
+
+def _get_json(params: dict) -> list[dict]:
+    ultimo = None
+    for intento in range(3):
+        try:
+            resp = requests.get(DATASET_URL, params=params, timeout=60)
+            resp.raise_for_status()
+            return resp.json()
+        except requests.RequestException as e:
+            ultimo = e
+            time.sleep(2 * (intento + 1))
+    raise ultimo
+
+
+def _consultar(where: str) -> list[dict]:
+    """Trae TODAS las páginas (no se corta en 500). No usa $select a propósito:
+    así los campos de estado llegan completos y un nombre de columna incorrecto
+    no rompe la consulta."""
+    filas: list[dict] = []
+    for pagina in range(MAX_PAGINAS):
+        params = {
+            "$where": where,
+            "$order": "fecha_de_recepcion_de ASC, id_del_proceso ASC",
+            "$limit": str(LIMITE_PAGINA),
+            "$offset": str(pagina * LIMITE_PAGINA),
+        }
+        lote = _get_json(params)
+        filas.extend(lote)
+        if len(lote) < LIMITE_PAGINA:
+            break
+    else:
+        print(f"[aviso] Se alcanzó el máximo de {MAX_PAGINAS} páginas; puede haber más resultados.")
+    return filas
+
+
+def _fecha_iso(d: datetime.date) -> str:
+    return f"{d.isoformat()}T00:00:00.000"
+
+
+def where_aerocivil(hoy: datetime.date) -> str:
+    w = f"nit_entidad like '{NIT_AEROCIVIL}%' AND fecha_de_recepcion_de >= '{_fecha_iso(hoy)}'"
+    if VALOR_MINIMO_AEROCIVIL:
+        w += f" AND precio_base >= {VALOR_MINIMO_AEROCIVIL}"
+    return w
+
+
+def where_solar(hoy: datetime.date) -> str:
     ors = []
-    for palabra in PALABRAS_CLAVE:
-        for variante in _variantes_sin_tilde(palabra):
-            ors.append(f"upper(nombre_del_procedimiento) like '%{variante}%'")
-            ors.append(f"upper(descripci_n_del_procedimiento) like '%{variante}%'")
-    for entidad_clave in ENTIDADES_CLAVE:
-        for variante in _variantes_sin_tilde(entidad_clave):
-            ors.append(f"upper(entidad) like '%{variante}%'")
-    clausula_sector = " OR ".join(ors)
+    for pat in PREFILTRO_SOLAR:
+        ors.append(f"upper(nombre_del_procedimiento) like '{pat}'")
+        ors.append(f"upper(descripci_n_del_procedimiento) like '{pat}'")
     return (
-        f"( {clausula_sector} ) "
-        f"AND precio_base >= {VALOR_MINIMO} "
-        f"AND fecha_de_recepcion_de >= '{fecha_min_iso}'"
+        f"( {' OR '.join(ors)} ) "
+        f"AND precio_base >= {VALOR_MINIMO_SOLAR} "
+        f"AND fecha_de_recepcion_de >= '{_fecha_iso(hoy)}'"
     )
 
 
-def consultar_secop(fecha_min: datetime.date) -> list[dict]:
-    campos = (
-        "id_del_proceso,referencia_del_proceso,entidad,departamento_entidad,ciudad_entidad,"
-        "nombre_del_procedimiento,descripci_n_del_procedimiento,"
-        "precio_base,modalidad_de_contratacion,fase,fecha_de_recepcion_de,urlproceso"
-    )
-    params = {
-        "$where": construir_where(f"{fecha_min.isoformat()}T00:00:00.000"),
-        "$select": campos,
-        "$order": "fecha_de_recepcion_de ASC",
-        "$limit": "500",
-    }
-    resp = requests.get(DATASET_URL, params=params, timeout=30)
-    resp.raise_for_status()
-    return resp.json()
+# ---------------------------------------------------------------------------
+# Filtros precisos
+# ---------------------------------------------------------------------------
+
+_ESTADOS_NO_VIGENTES = (
+    "ADJUDIC", "CANCEL", "SUSPEND", "DESIERT", "TERMINAD", "CELEBRAD",
+    "LIQUIDAD", "REVOCAD", "DESCARTAD", "ANULAD",
+)
 
 
-def clasificar_departamento(proceso: dict) -> str:
-    """Devuelve el departamento de Colombia al que pertenece el proceso —
-    TODOS los departamentos son válidos, no solo un grupo fijo. Primero
-    revisa si el título/objeto/ciudad menciona un municipio "ancla" conocido
-    (para no perder procesos de entidades nacionales, tipo Aerocivil, que en
-    realidad se ejecutan en una región concreta); si no, usa el departamento
-    de la entidad tal como lo reporta el dataset."""
-    texto = _quitar_tildes(
-        " ".join(
-            [
-                proceso.get("nombre_del_procedimiento") or "",
-                proceso.get("descripci_n_del_procedimiento") or "",
-                proceso.get("ciudad_entidad") or "",
-            ]
-        )
-    )
-
-    for depto_ancla, municipios in MUNICIPIOS_POR_DEPARTAMENTO.items():
-        if any(_quitar_tildes(m) in texto for m in municipios):
-            return depto_ancla
-
-    depto = (proceso.get("departamento_entidad") or "").strip()
-    return depto or "Sin departamento (Nacional)"
+def esta_vigente(p: dict, hoy: datetime.date) -> bool:
+    """Fecha límite no vencida y sin estado de cierre (adjudicado, cancelado...)."""
+    fecha = (p.get("fecha_de_recepcion_de") or "")[:10]
+    try:
+        if not fecha or datetime.date.fromisoformat(fecha) < hoy:
+            return False
+    except ValueError:
+        return False
+    if _norm(p.get("adjudicado")).strip() in ("SI", "TRUE"):
+        return False
+    for campo in ("estado_del_procedimiento", "estado_resumen", "fase"):
+        valor = _norm(p.get(campo))
+        if any(x in valor for x in _ESTADOS_NO_VIGENTES):
+            return False
+    return True
 
 
-def clasificar_categoria(proceso: dict) -> str:
-    """Determina si el proceso es de Aeronáutica Civil o de Energía Solar
-    Fotovoltaica, según qué palabra clave hizo match."""
-    texto = _quitar_tildes(
-        " ".join(
-            [
-                proceso.get("nombre_del_procedimiento") or "",
-                proceso.get("descripci_n_del_procedimiento") or "",
-            ]
-        )
-    )
-    if any(_quitar_tildes(p) in texto for p in PALABRAS_SOLAR):
-        return "Energía Solar Fotovoltaica"
-    if any(_quitar_tildes(p) in texto for p in PALABRAS_AERONAUTICA):
-        return "Aeronáutica Civil"
-    return "Aeronáutica Civil"  # respaldo (no debería pasar: el filtro ya exige una de las dos)
+def coincide_solar(texto_norm: str) -> bool:
+    if any(pat.search(texto_norm) for pat in PATRONES_SOLAR_FUERTES):
+        return True
+    if _RE_SOLAR_SUELTO.search(texto_norm):
+        if any(c in texto_norm for c in _CONTEXTO_ENERGIA):
+            return True
+        if any(c in texto_norm for c in _CONTEXTO_TERRENO):
+            return False
+        return True
+    return False
 
 
-def a_registro_base44(p: dict) -> dict:
-    """Convierte un proceso al formato exacto que espera la entidad
-    ProcesoSecop de la app de Base44."""
-    fecha = (p.get("fecha_de_recepcion_de") or "")[:10] or None
-    return {
-        "numero_proceso": p.get("referencia_del_proceso") or p.get("id_del_proceso") or "(sin número)",
-        "entidad": p.get("entidad") or "",
-        "objeto": p.get("nombre_del_procedimiento") or p.get("descripci_n_del_procedimiento") or "",
-        "valor": float(p.get("precio_base") or 0),
-        "fecha_limite": fecha,
-        "link": (p.get("urlproceso") or {}).get("url", ""),
-        "region": clasificar_departamento(p),
-        "categoria": clasificar_categoria(p),
-        "estado": "Abierto",
-    }
+def es_aerocivil(p: dict) -> bool:
+    digitos = re.sub(r"\D", "", p.get("nit_entidad") or "")
+    return digitos.startswith(NIT_AEROCIVIL)
+
+
+def obtener_aerocivil(hoy: datetime.date) -> list[dict]:
+    filas = _consultar(where_aerocivil(hoy))
+    return [
+        p for p in filas
+        if es_aerocivil(p) and esta_vigente(p, hoy) and _valor(p) >= VALOR_MINIMO_AEROCIVIL
+    ]
+
+
+def obtener_solar(hoy: datetime.date) -> list[dict]:
+    filas = _consultar(where_solar(hoy))
+    return [
+        p for p in filas
+        if coincide_solar(_texto_proceso(p)) and esta_vigente(p, hoy) and _valor(p) >= VALOR_MINIMO_SOLAR
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Clasificación, deduplicación y orden
+# ---------------------------------------------------------------------------
+
+_DEPTOS_NACIONALES = ("DISTRITO CAPITAL DE BOGOTA", "BOGOTA", "")
+
+
+def _es_entidad_nacional(p: dict) -> bool:
+    orden = _norm(p.get("ordenentidad")).strip()
+    depto = _norm(p.get("departamento_entidad")).strip()
+    return orden.startswith("NACIONAL") or depto in _DEPTOS_NACIONALES
+
+
+def _patron_ancla(nombre: str) -> "re.Pattern":
+    # (?<!\w)/(?!\w) en vez de \b para soportar anclas como "(Meta)".
+    return re.compile(r"(?<!\w)" + re.escape(_norm(nombre)) + r"(?!\w)")
+
+
+_PATRONES_ANCLA = {
+    depto: [_patron_ancla(n) for n in nombres] for depto, nombres in MUNICIPIOS_POR_DEPARTAMENTO.items()
+}
+
+
+def clasificar_departamento(p: dict) -> str:
+    """Departamento de la entidad. Solo para entidades nacionales se busca una
+    ancla (municipio, aeropuerto o nombre del departamento) en el texto, por
+    palabra completa, para ubicar la obra; si hay varias, gana la que aparece
+    primero en el texto."""
+    if _es_entidad_nacional(p):
+        texto = _texto_proceso(p)
+        mejor, pos_mejor = None, None
+        for depto, patrones in _PATRONES_ANCLA.items():
+            for pat in patrones:
+                m = pat.search(texto)
+                if m and (pos_mejor is None or m.start() < pos_mejor):
+                    mejor, pos_mejor = depto, m.start()
+        if mejor:
+            return mejor
+    return (p.get("departamento_entidad") or "").strip() or "Sin departamento (Nacional)"
 
 
 def _clave_dedup(p: dict) -> tuple:
-    """Referencia del proceso sin la parte de fase entre paréntesis
-    (p.ej. 'SA-SIE-011-2026 (Presentación de oferta)' -> 'SA-SIE-011-2026'),
-    que es estable entre las distintas fases de un mismo proceso. Si no hay
-    referencia, usa entidad + nombre como respaldo."""
-    ref = (p.get("referencia_del_proceso") or "").split("(")[0].strip()
+    ref = limpiar_fase(p.get("referencia_del_proceso"))
     if ref:
-        return ("ref", ref)
+        return ("ref", p.get("nit_entidad") or p.get("entidad"), ref)
     return ("entidad_nombre", p.get("entidad"), (p.get("nombre_del_procedimiento") or "")[:80])
 
 
-# Orden aproximado del ciclo de vida del proceso: entre más alto, más
-# "avanzado" (más cerca de la presentación real de la oferta). Se usa para
-# quedarnos con la fase vigente cuando el mismo proceso aparece varias veces.
-_ORDEN_FASE = [
-    "borrador",
-    "planeación",
-    "manifestación de interés",
-    "presentación de oferta",
-    "evaluación",
-    "adjudicación",
-]
+_ORDEN_FASE = ["borrador", "planeación", "manifestación de interés", "presentación de oferta", "evaluación", "adjudicación"]
 
 
 def _prioridad_fase(p: dict) -> int:
@@ -284,28 +436,18 @@ def _prioridad_fase(p: dict) -> int:
     for i, palabra in enumerate(_ORDEN_FASE):
         if palabra in fase:
             return i
-    return len(_ORDEN_FASE) // 2  # fase desconocida: prioridad media
+    return len(_ORDEN_FASE) // 2
 
 
 def deduplicar(procesos: list[dict]) -> list[dict]:
-    """Colapsa procesos que son claramente el mismo (misma referencia, o misma
-    entidad + mismo nombre), quedándose con la fase más avanzada/vigente
-    (y, si empatan, con la fecha límite más reciente)."""
-    vistos = {}
+    """Colapsa registros del mismo proceso, dejando la fase más avanzada."""
+    vistos: dict = {}
     for p in procesos:
         clave = _clave_dedup(p)
         actual = vistos.get(clave)
-        if actual is None:
-            vistos[clave] = p
-            continue
-        nuevo_mejor = (
-            _prioridad_fase(p),
-            p.get("fecha_de_recepcion_de") or "",
-        ) > (
-            _prioridad_fase(actual),
-            actual.get("fecha_de_recepcion_de") or "",
-        )
-        if nuevo_mejor:
+        if actual is None or (_prioridad_fase(p), p.get("fecha_de_recepcion_de") or "") > (
+            _prioridad_fase(actual), actual.get("fecha_de_recepcion_de") or ""
+        ):
             vistos[clave] = p
     return list(vistos.values())
 
@@ -319,155 +461,210 @@ def _agrupar_por_departamento(procesos: list[dict]) -> dict[str, list[dict]]:
     return por_depto
 
 
-def _orden_departamentos(por_depto: dict[str, list[dict]]) -> list[str]:
-    """Arauca primero (es la región de origen de Chronos), luego el resto de
-    departamentos en orden alfabético, y el catch-all al final."""
-    catchall = "Sin departamento (Nacional)"
-    deptos = [d for d in por_depto if d != "Arauca" and d != catchall]
-    deptos.sort()
-    orden = []
-    if "Arauca" in por_depto:
-        orden.append("Arauca")
-    orden.extend(deptos)
-    if catchall in por_depto:
-        orden.append(catchall)
-    return orden
+_CATCHALL = "Sin departamento (Nacional)"
+
+
+def _es_prioritario(depto: str) -> bool:
+    return _norm(depto) in {_norm(d) for d in DEPARTAMENTOS_PRIORITARIOS}
+
+
+def _orden_departamentos(por_depto: dict) -> list[str]:
+    """Departamentos de interés (en el orden de DEPARTAMENTOS_PRIORITARIOS),
+    luego los demás en orden alfabético, y al final el catch-all."""
+    rango = {_norm(d): i for i, d in enumerate(DEPARTAMENTOS_PRIORITARIOS)}
+    prioritarios = sorted((d for d in por_depto if _norm(d) in rango), key=lambda d: rango[_norm(d)])
+    otros = sorted(d for d in por_depto if _norm(d) not in rango and d != _CATCHALL)
+    return prioritarios + otros + ([_CATCHALL] if _CATCHALL in por_depto else [])
 
 
 def _dias_restantes(p: dict, hoy: datetime.date):
     fecha = (p.get("fecha_de_recepcion_de") or "")[:10]
-    if not fecha:
-        return fecha, None
     try:
         return fecha, (datetime.date.fromisoformat(fecha) - hoy).days
     except ValueError:
         return fecha, None
 
 
-def formatear_resumen(procesos: list[dict], hoy: datetime.date) -> str:
-    """Versión en texto plano (respaldo para clientes de correo sin HTML)."""
+# ---------------------------------------------------------------------------
+# Salidas: Base44, texto y HTML
+# ---------------------------------------------------------------------------
+
+def a_registro_base44(p: dict, categoria: str) -> dict:
+    """Formato exacto que espera la entidad ProcesoSecop de la app de Base44."""
+    objeto, _ = objeto_y_detalle(p)
+    return {
+        "numero_proceso": _referencia(p),
+        "entidad": p.get("entidad") or "",
+        "objeto": objeto,
+        "valor": _valor(p),
+        "fecha_limite": (p.get("fecha_de_recepcion_de") or "")[:10] or None,
+        "link": _url_proceso(p) or URL_BUSQUEDA_SECOP,
+        "region": clasificar_departamento(p),
+        "categoria": categoria,
+        "estado": "Abierto",
+    }
+
+
+ETIQUETAS = {"aero": "Aerocivil", "solar": "Solar / energías"}
+COLORES = {"aero": "#1d4ed8", "solar": "#b45309"}
+
+
+def _cuenta(procesos: list[dict]) -> tuple[int, int]:
+    n_aero = sum(1 for p in procesos if p.get("_cat") == "aero")
+    return n_aero, len(procesos) - n_aero
+
+
+def formatear_resumen(procesos: list[dict], hoy: datetime.date, avisos: list[str]) -> str:
+    """Texto plano, organizado por DEPARTAMENTO (Arauca primero)."""
+    n_aero, n_solar = _cuenta(procesos)
+    lineas = [
+        f"SECOP - Oportunidades abiertas del {hoy.isoformat()} "
+        f"({len(procesos)} procesos: Aerocivil {n_aero} · Solar/energías {n_solar})"
+    ]
+    for a in avisos:
+        lineas.append(f"\n[ATENCIÓN] {a}")
     if not procesos:
-        return f"SECOP - Oportunidades del {hoy.isoformat()}\n\nNo hay procesos abiertos que cumplan los criterios hoy.\n"
-
+        lineas.append("\nNo hay procesos vigentes hoy que cumplan los criterios.")
+        return "\n".join(lineas)
     por_depto = _agrupar_por_departamento(procesos)
-
-    lineas = [f"SECOP - Oportunidades abiertas del {hoy.isoformat()} ({len(procesos)} procesos)\n"]
-    for depto in _orden_departamentos(por_depto):
-        items = por_depto.get(depto)
-        if not items:
-            continue
-        lineas.append(f"\n=== {depto} ({len(items)}) ===")
+    orden = _orden_departamentos(por_depto)
+    lineas.append("\nPor departamento: " + " · ".join(f"{d} ({len(por_depto[d])})" for d in orden))
+    hubo_prioritario = mostro_otros = False
+    for depto in orden:
+        items = por_depto[depto]
+        if _es_prioritario(depto):
+            hubo_prioritario = True
+        elif hubo_prioritario and not mostro_otros:
+            mostro_otros = True
+            lineas.append("\n---------- OTROS DEPARTAMENTOS ----------")
+        lineas.append(f"\n=== {depto.upper()} ({len(items)}) ===")
         for p in items:
             fecha, dias = _dias_restantes(p, hoy)
-            valor = int(float(p.get("precio_base") or 0))
-            url = (p.get("urlproceso") or {}).get("url", "")
-            referencia = p.get("referencia_del_proceso") or p.get("id_del_proceso") or "(sin número)"
+            objeto, detalle = objeto_y_detalle(p)
+            ubic = p.get("ciudad_entidad") or p.get("departamento_entidad") or "s/d"
+            etiqueta = ETIQUETAS.get(p.get("_cat"), "")
             lineas.append(
-                f"- Nº proceso: {referencia}\n"
-                f"    Entidad: {p.get('entidad')} ({p.get('ciudad_entidad') or p.get('departamento_entidad') or 's/d'})\n"
-                f"    Objeto: {p.get('nombre_del_procedimiento')}\n"
-                f"    Valor: ${valor:,} | Cierra: {fecha} ({dias if dias is not None else '?'} días) | "
+                f"- [{etiqueta}] Nº proceso: {_referencia(p)}\n"
+                f"  Entidad: {p.get('entidad')} ({ubic})\n"
+                f"  Objeto: {objeto}\n"
+                + (f"  Detalle: {detalle}\n" if detalle else "")
+                + f"  Valor: {_fmt_cop(_valor(p))} | Cierra: {fecha} ({dias if dias is not None else '?'} días) | "
                 f"Modalidad: {p.get('modalidad_de_contratacion')} | Fase: {p.get('fase')}\n"
-                f"    Link: {url}"
+                f"  Link: {_url_proceso(p) or 'Sin enlace directo — buscar la referencia en ' + URL_BUSQUEDA_SECOP}"
             )
     return "\n".join(lineas)
 
 
-def formatear_resumen_html(procesos: list[dict], hoy: datetime.date) -> str:
-    """Versión en HTML: una tabla por región, ordenada por fecha límite más próxima."""
-    estilo_tabla = (
-        "width:100%;border-collapse:collapse;margin:0 0 24px 0;font-family:Arial,sans-serif;font-size:13px;"
-    )
-    estilo_th = (
-        "text-align:left;padding:6px 8px;background:#1f2937;color:#ffffff;border:1px solid #d1d5db;"
-    )
-    estilo_td = "padding:6px 8px;border:1px solid #d1d5db;vertical-align:top;"
+def formatear_resumen_html(procesos: list[dict], hoy: datetime.date, avisos: list[str]) -> str:
+    """HTML organizado por DEPARTAMENTO (Arauca primero); dentro de cada uno,
+    por fecha de cierre, con una etiqueta que indica el criterio."""
+    e = html.escape
+    st_tabla = "width:100%;border-collapse:collapse;margin:0 0 24px 0;font-family:Arial,sans-serif;font-size:13px;"
+    st_th = "text-align:left;padding:6px 8px;background:#1f2937;color:#ffffff;border:1px solid #d1d5db;"
+    st_td = "padding:6px 8px;border:1px solid #d1d5db;vertical-align:top;"
+    gris = "color:#6b7280;"
 
-    if not procesos:
-        return (
-            f"<html><body style='font-family:Arial,sans-serif;'>"
-            f"<h2>SECOP - Oportunidades del {hoy.isoformat()}</h2>"
-            f"<p>No hay procesos abiertos que cumplan los criterios hoy.</p>"
-            f"</body></html>"
-        )
-
-    por_depto = _agrupar_por_departamento(procesos)
-
+    n_aero, n_solar = _cuenta(procesos)
     partes = [
         "<html><body style='font-family:Arial,sans-serif;color:#111827;'>",
-        f"<h2 style='margin-bottom:4px;'>SECOP - Oportunidades abiertas</h2>",
-        f"<p style='margin-top:0;color:#4b5563;'>{hoy.isoformat()} &middot; {len(procesos)} procesos</p>",
+        "<h1 style='margin-bottom:4px;font-size:20px;'>SECOP - Oportunidades abiertas</h1>",
+        f"<p style='margin-top:0;{gris}'>{hoy.isoformat()} &middot; {len(procesos)} procesos "
+        f"(Aerocivil {n_aero} &middot; Solar/energías {n_solar})</p>",
     ]
+    for a in avisos:
+        partes.append(
+            "<p style='background:#fef2f2;border:1px solid #fecaca;padding:8px;color:#991b1b;'>"
+            f"<b>Atención:</b> {e(a)}</p>"
+        )
+    if not procesos:
+        partes.append("<p>No hay procesos vigentes hoy que cumplan los criterios.</p></body></html>")
+        return "\n".join(partes)
 
-    for depto in _orden_departamentos(por_depto):
-        items = por_depto.get(depto)
-        if not items:
-            continue
-        partes.append(f"<h3 style='margin-bottom:6px;'>{html.escape(depto)} ({len(items)})</h3>")
-        partes.append(f"<table style='{estilo_tabla}'>")
+    por_depto = _agrupar_por_departamento(procesos)
+    orden = _orden_departamentos(por_depto)
+    partes.append(
+        f"<p style='font-size:13px;'><b>Por departamento:</b> "
+        + " &middot; ".join(f"{e(d)} ({len(por_depto[d])})" for d in orden)
+        + "</p>"
+    )
+
+    hubo_prioritario = mostro_otros = False
+    for depto in orden:
+        items = por_depto[depto]
+        if _es_prioritario(depto):
+            hubo_prioritario = True
+        elif hubo_prioritario and not mostro_otros:
+            mostro_otros = True
+            partes.append(
+                f"<p style='{gris}font-size:12px;text-transform:uppercase;letter-spacing:1px;"
+                "border-top:2px solid #9ca3af;padding-top:12px;margin-top:32px;'>Otros departamentos</p>"
+            )
+        partes.append(
+            f"<h2 style='background:#e5e7eb;padding:8px;margin:24px 0 8px 0;font-size:16px;'>"
+            f"{e(depto)} <span style='{gris}font-weight:normal;'>({len(items)})</span></h2>"
+        )
+        partes.append(f"<table style='{st_tabla}'>")
         partes.append(
             "<tr>"
-            f"<th style='{estilo_th}'>Nº proceso</th>"
-            f"<th style='{estilo_th}'>Entidad / ubicación</th>"
-            f"<th style='{estilo_th}'>Objeto</th>"
-            f"<th style='{estilo_th}'>Valor</th>"
-            f"<th style='{estilo_th}'>Modalidad / Fase</th>"
-            f"<th style='{estilo_th}'>Cierra</th>"
-            f"<th style='{estilo_th}'>Días</th>"
-            f"<th style='{estilo_th}'>Ver</th>"
+            f"<th style='{st_th}'>Proceso / Entidad</th>"
+            f"<th style='{st_th}'>Objeto</th>"
+            f"<th style='{st_th}'>Valor</th>"
+            f"<th style='{st_th}'>Modalidad / Fase</th>"
+            f"<th style='{st_th}'>Cierra</th>"
+            f"<th style='{st_th}'>Ver</th>"
             "</tr>"
         )
         for p in items:
             fecha, dias = _dias_restantes(p, hoy)
-            valor = int(float(p.get("precio_base") or 0))
-            url = (p.get("urlproceso") or {}).get("url", "")
-            referencia = p.get("referencia_del_proceso") or p.get("id_del_proceso") or "(sin número)"
-            ubicacion = p.get("ciudad_entidad") or p.get("departamento_entidad") or "s/d"
-
+            objeto, detalle = objeto_y_detalle(p)
+            ubic = p.get("ciudad_entidad") or p.get("departamento_entidad") or "s/d"
             urgente = dias is not None and dias <= 5
-            estilo_dias = "color:#b91c1c;font-weight:bold;" if urgente else ""
-
+            st_dias = "color:#b91c1c;font-weight:bold;" if urgente else gris
+            cat = p.get("_cat")
+            badge = (
+                f"<span style='background:{COLORES.get(cat, '#374151')};color:#ffffff;font-size:11px;"
+                f"padding:1px 6px;border-radius:3px;'>{e(ETIQUETAS.get(cat, ''))}</span><br>"
+            )
+            url = _url_proceso(p)
+            enlace = (
+                f"<a href='{e(url, quote=True)}'>Abrir</a>"
+                if url
+                else f"<a href='{e(URL_BUSQUEDA_SECOP, quote=True)}'>Buscar</a>"
+                f"<br><span style='{gris}font-size:11px;'>sin enlace directo</span>"
+            )
             partes.append(
                 "<tr>"
-                f"<td style='{estilo_td}'>{html.escape(str(referencia))}</td>"
-                f"<td style='{estilo_td}'>{html.escape(p.get('entidad') or '')}<br>"
-                f"<span style='color:#6b7280;'>{html.escape(ubicacion)}</span></td>"
-                f"<td style='{estilo_td}'>{html.escape(p.get('nombre_del_procedimiento') or '')}</td>"
-                f"<td style='{estilo_td}'>${valor:,}</td>"
-                f"<td style='{estilo_td}'>{html.escape(p.get('modalidad_de_contratacion') or '')}"
-                f"<br><span style='color:#6b7280;'>{html.escape(p.get('fase') or '')}</span></td>"
-                f"<td style='{estilo_td}'>{fecha}</td>"
-                f"<td style='{estilo_td}{estilo_dias}'>{dias if dias is not None else '?'}</td>"
-                f"<td style='{estilo_td}'><a href='{html.escape(url)}'>Abrir</a></td>"
+                f"<td style='{st_td}'>{badge}<b>{e(_referencia(p))}</b><br>{e(p.get('entidad') or '')}"
+                f"<br><span style='{gris}'>{e(ubic)}</span></td>"
+                f"<td style='{st_td}'>{e(objeto)}"
+                + (f"<br><span style='{gris}font-size:12px;'>{e(detalle)}</span>" if detalle else "")
+                + "</td>"
+                f"<td style='{st_td}white-space:nowrap;'>{e(_fmt_cop(_valor(p)))}</td>"
+                f"<td style='{st_td}'>{e(p.get('modalidad_de_contratacion') or '')}"
+                f"<br><span style='{gris}'>{e(p.get('fase') or '')}</span></td>"
+                f"<td style='{st_td}white-space:nowrap;'>{e(fecha)}"
+                f"<br><span style='{st_dias}'>{dias if dias is not None else '?'} días</span></td>"
+                f"<td style='{st_td}'>{enlace}</td>"
                 "</tr>"
             )
         partes.append("</table>")
-
     partes.append("</body></html>")
     return "\n".join(partes)
 
 
 def enviar_por_correo(asunto: str, cuerpo_texto: str, cuerpo_html: str) -> None:
-    """Envía el resumen por Gmail (HTML, con texto plano de respaldo) usando
-    las variables de entorno GMAIL_ADDRESS, GMAIL_APP_PASSWORD y DEST_EMAIL.
-    No hace nada si no están definidas."""
     remitente = os.environ.get("GMAIL_ADDRESS")
     clave_app = os.environ.get("GMAIL_APP_PASSWORD")
     destinatario = os.environ.get("DEST_EMAIL")
-
     if not (remitente and clave_app and destinatario):
         print("[info] Variables de correo no definidas — no se envía correo, solo se imprime.")
         return
-
     msg = MIMEMultipart("alternative")
     msg["Subject"] = asunto
     msg["From"] = remitente
     msg["To"] = destinatario
-    # El primer "attach" es el respaldo de texto plano; el último es el que
-    # los clientes de correo modernos (Gmail incluido) muestran por defecto.
     msg.attach(MIMEText(cuerpo_texto, "plain", "utf-8"))
     msg.attach(MIMEText(cuerpo_html, "html", "utf-8"))
-
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as servidor:
         servidor.login(remitente, clave_app)
         servidor.sendmail(remitente, [destinatario], msg.as_string())
@@ -480,39 +677,66 @@ def main():
     ap.add_argument(
         "--base44-json",
         default="secop_data.json",
-        help="Ruta donde se guarda siempre el resumen del día ya listo para la app de "
-        "Base44 (numero_proceso, entidad, objeto, valor, fecha_limite, link, region "
-        "[ahora es el departamento], categoria, estado). Por defecto: secop_data.json "
-        "en el directorio actual.",
+        help="Ruta del resumen listo para la app de Base44 (por defecto secop_data.json).",
     )
     args = ap.parse_args()
 
-    hoy = datetime.date.today()
-    procesos = consultar_secop(hoy)
-    procesos = deduplicar(procesos)
+    # Fecha en hora de Colombia (en GitHub Actions el reloj está en UTC).
+    hoy = datetime.datetime.now(ZoneInfo("America/Bogota")).date()
+
+    avisos: list[str] = []
+    aero: list[dict] = []
+    solar: list[dict] = []
+    ok_aero = ok_solar = True
+    try:
+        aero = deduplicar(obtener_aerocivil(hoy))
+    except Exception as exc:  # noqa: BLE001
+        ok_aero = False
+        avisos.append(f"No se pudo consultar el criterio 1 (Aerocivil): {exc}")
+    try:
+        solar = deduplicar(obtener_solar(hoy))
+    except Exception as exc:  # noqa: BLE001
+        ok_solar = False
+        avisos.append(f"No se pudo consultar el criterio 2 (energía solar/alternativas): {exc}")
+
+    # Un proceso que cumple ambos criterios se muestra una sola vez, como Aerocivil.
+    claves_aero = {_clave_dedup(p) for p in aero}
+    solar = [p for p in solar if _clave_dedup(p) not in claves_aero]
+
+    for p in aero:
+        p["_cat"] = "aero"
+    for p in solar:
+        p["_cat"] = "solar"
+    todos = aero + solar
 
     if args.json:
         with open(args.json, "w", encoding="utf-8") as f:
-            json.dump(procesos, f, ensure_ascii=False, indent=2)
+            json.dump(todos, f, ensure_ascii=False, indent=2)
 
-    # Este archivo se guarda SIEMPRE (no solo con --json) porque GitHub Actions
-    # lo sube de vuelta al repositorio en cada corrida, y desde ahí Claude lo
-    # lee para mantener sincronizada la app de Base44 sin depender de tu PC.
-    registros_base44 = [a_registro_base44(p) for p in procesos]
-    with open(args.base44_json, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generado": hoy.isoformat(), "total": len(registros_base44), "procesos": registros_base44},
-            f,
-            ensure_ascii=False,
-            indent=2,
-        )
+    # El JSON de Base44 solo se reescribe si AMBAS consultas funcionaron, para
+    # no borrar los datos buenos con un resultado vacío por una falla de red.
+    if ok_aero and ok_solar:
+        registros = [
+            a_registro_base44(p, CAT_AEROCIVIL if p["_cat"] == "aero" else CAT_SOLAR) for p in todos
+        ]
+        with open(args.base44_json, "w", encoding="utf-8") as f:
+            json.dump(
+                {"generado": hoy.isoformat(), "total": len(registros), "procesos": registros},
+                f, ensure_ascii=False, indent=2,
+            )
 
-    resumen_texto = formatear_resumen(procesos, hoy)
-    resumen_html = formatear_resumen_html(procesos, hoy)
-    print(resumen_texto)
+    texto = formatear_resumen(todos, hoy, avisos)
+    cuerpo_html = formatear_resumen_html(todos, hoy, avisos)
+    print(texto)
 
-    asunto = f"SECOP - Oportunidades del {hoy.isoformat()} ({len(procesos)} procesos)"
-    enviar_por_correo(asunto, resumen_texto, resumen_html)
+    asunto = f"SECOP - Oportunidades del {hoy.isoformat()} (Aerocivil: {len(aero)} · Solar/energías: {len(solar)})"
+    if avisos:
+        asunto = "[CON ERRORES] " + asunto
+    enviar_por_correo(asunto, texto, cuerpo_html)
+
+    if avisos:
+        return 1
+    return 0
 
 
 if __name__ == "__main__":

@@ -1,51 +1,7 @@
 {
-  "generado": "2026-10-09",
-  "total": 21,
+  "generado": "2026-10-13",
+  "total": 24,
   "procesos": [
-    {
-      "numero_proceso": "26001128 H3 DE 2026 A",
-      "entidad": "AEROCIVIL",
-      "objeto": "RADIOAYUDAS (NUEVO)",
-      "valor": 789642789.0,
-      "fecha_limite": "2026-10-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11024807",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001236A H3 DE 2026",
-      "entidad": "AEROCIVIL",
-      "objeto": "MANTENER; LAVAR Y DESINFECTAR TANQUES DE AGUA POTABLE Y POZOS SEPTICOS PARA LOS AEROPUERTOS Y ESTACIONES ADSCRITOS A LA REGIONAL CENTRO SUR",
-      "valor": 175050305.0,
-      "fecha_limite": "2026-10-09",
-      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "BRINDAR SOPORTE A LOS EQUIPOS BALANCEADORES DE TRA",
-      "entidad": "AEROCIVIL",
-      "objeto": "BRINDAR SOPORTE A LOS EQUIPOS BALANCEADORES DE TRAFICO DE LA RED (F5)",
-      "valor": 0.0,
-      "fecha_limite": "2026-10-09",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11010157",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "BRINDAR SOPORTE TÉCNICO AL HARDWARE Y SOFTWARE DE",
-      "entidad": "AEROCIVIL",
-      "objeto": "BRINDAR SOPORTE TÉCNICO AL HARDWARE Y SOFTWARE DE LOS SWITCHES DE LOS CENTROS DE CABLEADO DE LA ENTIDAD",
-      "valor": 0.0,
-      "fecha_limite": "2026-10-09",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11010608",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
     {
       "numero_proceso": "26001457 H3",
       "entidad": "AEROCIVIL",
@@ -58,12 +14,45 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001128 H3 DE 2026 A",
+      "entidad": "AEROCIVIL",
+      "objeto": "RADIOAYUDAS (NUEVO)",
+      "valor": 789642789.0,
+      "fecha_limite": "2026-10-13",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11024807",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001441 A H4",
       "entidad": "AEROCIVIL",
       "objeto": "63400C1594 MANTENER LA INFRAESTRUCTURA AEROPORTUARIA DE EDIFICACIONES LADO TIERRA DEL AEROPUERTO SAN LUIS DE IPIALES",
       "valor": 150000000.0,
       "fecha_limite": "2026-10-14",
       "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "ADQUIRIR SUSCRIPCIONES DE LICENCIAMIENTO DE SOFTWA",
+      "entidad": "AEROCIVIL",
+      "objeto": "ADQUIRIR SUSCRIPCIONES DE LICENCIAMIENTO DE SOFTWARE ESPECIALIZADO AUTODESK",
+      "valor": 0.0,
+      "fecha_limite": "2026-10-16",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11043710",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001308  H1",
+      "entidad": "AEROCIVIL",
+      "objeto": "63500C1655 ADQUIRIR PEAJES ELECTRONICOS PARA EL PASO DE VEHICULOS EN COMISION DE LA REGIONAL NORORIENTE",
+      "valor": 16000000.0,
+      "fecha_limite": "2026-10-19",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11043086",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -135,12 +124,45 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001371A H3 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "SERVICIOS MEDICOS",
+      "valor": 516150029.0,
+      "fecha_limite": "2026-10-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11034676",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001490 H1 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "ADQUIRIR INSUMOS Y ACCESORIOS ELÉCTRICOS PARA MANTENIMIENTO DE AEROPUERTOS Y ESTACIONES DE LA REGIONAL CENTRO SUR",
+      "valor": 586252373.0,
+      "fecha_limite": "2026-10-23",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11037359",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001460 H4 DE 2026",
       "entidad": "AEROCIVIL",
       "objeto": "69200C1776 REALIZAR MANTENIMIENTO PREVENTIVO Y CORRECTIVO DE LA SEDE VACACIONAL DE SANTA MARTA DE LA AERONAUTICA CIVIL",
       "valor": 903957645.0,
       "fecha_limite": "2026-10-27",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10998068",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001491 H3",
+      "entidad": "AEROCIVIL",
+      "objeto": "63500C1796 REALIZAR EL MANTENIMIENTO PREVENTIVO Y CORRECTIVO A LOS SISTEMAS SPT Y SIPRA DE LOS AEROPUERTOS Y ESTACIONES DE LA REGIONAL NORORIENTE",
+      "valor": 510000000.0,
+      "fecha_limite": "2026-10-27",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11043173",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -168,14 +190,14 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "SDE-LP- 2026-0120",
-      "entidad": "ALCALDIA DISTRITAL DE BUENAVENTURA-VALLE",
-      "objeto": "CONSTRUCCIÓN DE LA CENTRAL DE GENERACIÓN DE ENERGÍA ELÉCTRICA HÍBRIDA (SOLAR-DIÉSEL)",
-      "valor": 1648510798.0,
-      "fecha_limite": "2026-10-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10980658",
-      "region": "Valle del Cauca",
-      "categoria": "Energía Solar Fotovoltaica",
+      "numero_proceso": "cccccccccccccccc",
+      "entidad": "AEROCIVIL",
+      "objeto": "ADQUIRIR EQUIPOS BIOMÉDICOS E INSUMOS PARA LOS SERVICIOS MÉDICOS DE LOS AEROPUERTOS ADMINISTRADOS POR LA AEROCIVIL",
+      "valor": 599871681.0,
+      "fecha_limite": "2026-11-05",
+      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {
@@ -186,6 +208,17 @@
       "fecha_limite": "2026-10-13",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10914544",
       "region": "Cesar",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SDE-LP- 2026-0120",
+      "entidad": "ALCALDIA DISTRITAL DE BUENAVENTURA-VALLE",
+      "objeto": "CONSTRUCCIÓN DE LA CENTRAL DE GENERACIÓN DE ENERGÍA ELÉCTRICA HÍBRIDA (SOLAR-DIÉSEL)",
+      "valor": 1648510798.0,
+      "fecha_limite": "2026-10-13",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10980658",
+      "region": "Valle del Cauca",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -214,10 +247,10 @@
     {
       "numero_proceso": "LP-01-2026",
       "entidad": "MINISTERIO DE MINAS Y ENERGIA",
-      "objeto": "LP-01-2023 copia",
+      "objeto": "Contratar el servicio de fiducia mercantil para el recaudo; administración; inversión; giro y pago de los recursos aportados al Fondo de Energías No Convencionales y Gestión Eficiente de la Energía",
       "valor": 5947112295.0,
       "fecha_limite": "2026-11-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11045868",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"

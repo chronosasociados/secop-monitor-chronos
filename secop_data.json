@@ -1,40 +1,7 @@
 {
-  "generado": "2026-10-13",
-  "total": 24,
+  "generado": "2026-10-16",
+  "total": 31,
   "procesos": [
-    {
-      "numero_proceso": "26001457 H3",
-      "entidad": "AEROCIVIL",
-      "objeto": "REALIZAR EL MANTENIMIENTO VEHÍCULOS SOPORTE TÉCNICO EN EL AEROPUERTO LOS COLONIZADORES DE SARAVENA",
-      "valor": 75965000.0,
-      "fecha_limite": "2026-10-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10994487",
-      "region": "Arauca",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001128 H3 DE 2026 A",
-      "entidad": "AEROCIVIL",
-      "objeto": "RADIOAYUDAS (NUEVO)",
-      "valor": 789642789.0,
-      "fecha_limite": "2026-10-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11024807",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001441 A H4",
-      "entidad": "AEROCIVIL",
-      "objeto": "63400C1594 MANTENER LA INFRAESTRUCTURA AEROPORTUARIA DE EDIFICACIONES LADO TIERRA DEL AEROPUERTO SAN LUIS DE IPIALES",
-      "valor": 150000000.0,
-      "fecha_limite": "2026-10-14",
-      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
     {
       "numero_proceso": "ADQUIRIR SUSCRIPCIONES DE LICENCIAMIENTO DE SOFTWA",
       "entidad": "AEROCIVIL",
@@ -53,6 +20,17 @@
       "valor": 16000000.0,
       "fecha_limite": "2026-10-19",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11043086",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001498 H4 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO DE LA PISTA DEL AEROPUERTO CANANGUCHAL DE VILLAGARZÓN",
+      "valor": 175029797.0,
+      "fecha_limite": "2026-10-19",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11059067",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -113,6 +91,105 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001413-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO LADO TIERRA EDIFICACIONES AEROPORTUARIAS NO CONS EN EL AEROPUERTO CAMILO DAZA DE CUCUTA",
+      "valor": 510000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054297",
+      "region": "Norte de Santander",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001414-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO RUTINARIO EDIFICACIONES LADO TIERRA DEL AEROPUERTO VARGAS SANTOS DE TAME",
+      "valor": 385000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054752",
+      "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001415-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO RUTINARIO EDIFICACIONES LADO TIERRA DEL AEROPUERTO LOS COLONIZADORES DE SARAVENA",
+      "valor": 418000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054842",
+      "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001416-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO RUTINARIO EDIFICACIONES LADO TIERRA DEL SANTIAGO PÉREZ QUIROZ DE ARAUCA",
+      "valor": 510000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054845",
+      "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001417-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO DE EDIFICACIONES LADO TIERRA DEL AEROPUERTO PUERTO RONDON",
+      "valor": 275000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054495",
+      "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001440-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "MANTENIMIENTO LADO TIERRA EDIFICACIONES AEROPORTUARIAS DEL AEROPUERTO PALONEGRO DE BUCARAMANGA",
+      "valor": 510000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11055101",
+      "region": "Santander",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001418-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO DE EDIFICACIONES LADO TIERRA DEL AEROPUERTO CRAVO NORTE",
+      "valor": 275000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054492",
+      "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001429-H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR MANTENIMIENTO RUTINARIO EDIFICACIONES LADO TIERRA DEL AEROPUERTO AGUAS CLARAS DE OCAÑA",
+      "valor": 510000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11054861",
+      "region": "Norte de Santander",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001469 H1",
+      "entidad": "AEROCIVIL",
+      "objeto": "SUMINISTRO DE COMBUSTIBLE Y LUBRICANTES REGIONAL ORIENTE",
+      "valor": 110000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001477 H1",
       "entidad": "AEROCIVIL",
       "objeto": "ELEMENTOS DE PROTECCION PERSONAL",
@@ -168,6 +245,28 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001492 H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "63500C1754 REALIZAR MANTENIMIENTO PISTA; PLATAFORMA Y RODAJE EN EL AEROPUERTO DE TIBU",
+      "valor": 510000000.0,
+      "fecha_limite": "2026-10-27",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11049624",
+      "region": "Norte de Santander",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001343 H4 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "63600C1177 REALIZAR LAS ADECUACIONES DEL PUNTO DE ACCESO VEHICULAR ALFA 8 Y ALFA 13 DEL AEROPUERTO VANGUARDIA DE VILLAVICENCIO",
+      "valor": 430960000.0,
+      "fecha_limite": "2026-10-27",
+      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Meta",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001487 H4 DE 2026",
       "entidad": "AEROCIVIL",
       "objeto": "69200C1775 REALIZAR MANTENIMIENTO INTEGRAL; PREVENTIVO Y CORRECTIVO DE LA SEDE VACACIONAL DE MARIQUITA",
@@ -190,7 +289,7 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "cccccccccccccccc",
+      "numero_proceso": "26001454 H2 DE 2026",
       "entidad": "AEROCIVIL",
       "objeto": "ADQUIRIR EQUIPOS BIOMÉDICOS E INSUMOS PARA LOS SERVICIOS MÉDICOS DE LOS AEROPUERTOS ADMINISTRADOS POR LA AEROCIVIL",
       "valor": 599871681.0,
@@ -201,39 +300,6 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "LOP-EICE-AMV-001-2026",
-      "entidad": "EMPRESA INDUSTRIAL Y COMERCIAL DEL ESTADO AREA METROPOLITANA DE VALLEDUPAR E.I.C.E. AMV",
-      "objeto": "INSTALACIÓN DE SISTEMAS DE ENERGÍA SOLAR FOTOVOLTAICA EN ZONAS NO INTERCONECTADA",
-      "valor": 9443936281.0,
-      "fecha_limite": "2026-10-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10914544",
-      "region": "Cesar",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SDE-LP- 2026-0120",
-      "entidad": "ALCALDIA DISTRITAL DE BUENAVENTURA-VALLE",
-      "objeto": "CONSTRUCCIÓN DE LA CENTRAL DE GENERACIÓN DE ENERGÍA ELÉCTRICA HÍBRIDA (SOLAR-DIÉSEL)",
-      "valor": 1648510798.0,
-      "fecha_limite": "2026-10-13",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10980658",
-      "region": "Valle del Cauca",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "SA-SV-039-2026",
-      "entidad": "GOBERNACION DE CALDAS",
-      "objeto": "Adquisición transporte e instalación a todo costo de plantas potabilizadores/dispensadores de agua (módulo compacto) operado mediante energía solar, para el fortalecimiento y garantía de acceso a agua potable en instituciones educativas del departamento de caldas; en el marco de la estrategia agua segura en mi escuela",
-      "valor": 2647572165.0,
-      "fecha_limite": "2026-10-14",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10947128",
-      "region": "Caldas",
-      "categoria": "Energía Solar Fotovoltaica",
-      "estado": "Abierto"
-    },
-    {
       "numero_proceso": "SAM-002 DE 2026",
       "entidad": "Rama Judicial  Dirección Seccional de Administración Judicial de Armenia",
       "objeto": "Realizar los estudios; diseños; suministro; instalación; legalización y puesta en funcionamiento de sistemas solares fotovoltaicos conectados a la red para los Palacios de Justicia de Armenia y Calarc",
@@ -241,6 +307,17 @@
       "fecha_limite": "2026-11-06",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10650622",
       "region": "Quindío",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LOP-EICE-AMV-002-2026",
+      "entidad": "EMPRESA INDUSTRIAL Y COMERCIAL DEL ESTADO AREA METROPOLITANA DE VALLEDUPAR E.I.C.E. AMV",
+      "objeto": "CONSTRUCCIÓN DE UN SISTEMA SOLAR FOTOVOLTAICO DE GENERACIÓN DISTRIBUIDA DE 0.99 MWE ETAPA 3 PARA EL DESARROLLO SOCIOECONÓMICO DEL MUNICIPIO DE BARRANCAS; EN EL DEPARTAMENTO DE   LA GUAJIRA",
+      "valor": 10292576398.0,
+      "fecha_limite": "2026-11-06",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11053613",
+      "region": "Cesar",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },

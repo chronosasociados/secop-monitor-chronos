@@ -1,40 +1,7 @@
 {
-  "generado": "2026-10-16",
-  "total": 31,
+  "generado": "2026-10-20",
+  "total": 40,
   "procesos": [
-    {
-      "numero_proceso": "ADQUIRIR SUSCRIPCIONES DE LICENCIAMIENTO DE SOFTWA",
-      "entidad": "AEROCIVIL",
-      "objeto": "ADQUIRIR SUSCRIPCIONES DE LICENCIAMIENTO DE SOFTWARE ESPECIALIZADO AUTODESK",
-      "valor": 0.0,
-      "fecha_limite": "2026-10-16",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11043710",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001308  H1",
-      "entidad": "AEROCIVIL",
-      "objeto": "63500C1655 ADQUIRIR PEAJES ELECTRONICOS PARA EL PASO DE VEHICULOS EN COMISION DE LA REGIONAL NORORIENTE",
-      "valor": 16000000.0,
-      "fecha_limite": "2026-10-19",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11043086",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001498 H4 DE 2026",
-      "entidad": "AEROCIVIL",
-      "objeto": "REALIZAR MANTENIMIENTO DE LA PISTA DEL AEROPUERTO CANANGUCHAL DE VILLAGARZÓN",
-      "valor": 175029797.0,
-      "fecha_limite": "2026-10-19",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11059067",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
     {
       "numero_proceso": "26001471 H2",
       "entidad": "AEROCIVIL",
@@ -80,6 +47,39 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "SIP-GSA010-2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "Solicitud cotización prestación del servicio integral de aseo y fumigación administrativa para la Aerocivil a nivel nacional; jardinería y trabajo básico de mantenimiento",
+      "valor": 0.0,
+      "fecha_limite": "2026-10-20",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11068640",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001500 H1 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "ADQUIRIR ELEMENTOS Y SERVICIOS PARA SIMULACROS SEI DE LA REGIONAL CENTRO SUR",
+      "valor": 65000000.0,
+      "fecha_limite": "2026-10-20",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11070235",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "SIP-GSA011-2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "Solicitud cotización prestar el servicio de transporte para servidores públicos de la aeronáutica civil que laboran en el nivel central y los aeropuertos adscritos a las regionales",
+      "valor": 0.0,
+      "fecha_limite": "2026-10-20",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11075482",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001333 H4",
       "entidad": "AEROCIVIL",
       "objeto": "ADQUIRIR E INSTALAR TORRE AUTOSOPORTADA DE COMUNICACIONES EN EL AEROPUERTO DE SARAVENA INCLUYE CONSTRUCCIÓN DE SALA CUARTO DE EQUIPOS Y ADECUACIONES MENORES",
@@ -87,6 +87,28 @@
       "fecha_limite": "2026-10-21",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11014587",
       "region": "Arauca",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001322 H3 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "63600C1182 REALIZAR INVENTARIOS FORESTALES Y ESTUDIOS COMPLEMENTARIOS DE LOS AEROPUERTOS DE LA REGIONAL ORIENTE",
+      "valor": 700000000.0,
+      "fecha_limite": "2026-10-21",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11068293",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "EXT-001-2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "COTIZACION PROCESO EXTINTORES NOROCCIDENTE",
+      "valor": 0.0,
+      "fecha_limite": "2026-10-21",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11075070",
+      "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -179,6 +201,17 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001236A H3 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "MANTENER; LAVAR Y DESINFECTAR TANQUES DE AGUA POTABLE Y POZOS SEPTICOS PARA LOS AEROPUERTOS Y ESTACIONES ADSCRITOS A LA REGIONAL CENTRO SUR",
+      "valor": 175050305.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001469 H1",
       "entidad": "AEROCIVIL",
       "objeto": "SUMINISTRO DE COMBUSTIBLE Y LUBRICANTES REGIONAL ORIENTE",
@@ -186,6 +219,28 @@
       "fecha_limite": "2026-10-22",
       "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
       "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001504 H3",
+      "entidad": "AEROCIVIL",
+      "objeto": "63200C1504 REALIZAR MANTENIMIENTO PREVENTIVO Y CORRECTIVO DEL ASCENSOR DE LA TORRE DE CONTROL DEL AEROPUERTO OLAYA HERRERA DE MEDELLIN",
+      "valor": 12000000.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11074946",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "25001244A H1 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "REALIZAR EL MONITOREO; CAPTURA Y CONTROL DE FAUNA SILVESTRE EN LOS AEROPUERTOS DE PAIPA; MARIQUITA Y CHAPARRAL DE LA REGIONAL CENTRO SUR",
+      "valor": 53793395.0,
+      "fecha_limite": "2026-10-22",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11078001",
+      "region": "Boyacá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
@@ -278,6 +333,28 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001502 H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "63500C1367 REALIZAR SEÑALIZACION HORIZONTAL Y VERTICAL LADO AIRE EN EL AEROPUERTO DE TIBU",
+      "valor": 385000000.0,
+      "fecha_limite": "2026-10-30",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11070899",
+      "region": "Norte de Santander",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001501 H4",
+      "entidad": "AEROCIVIL",
+      "objeto": "63500C1262 REALIZAR EL MANTENIMIENTO INSTALACIONES FÍSICAS ÁREAS DE CONTROL Y APROXIMACIÓN DE TRÁNSITO AÉREO EN EL AEROPUERTO CAMILO DAZA DE CUCUTA",
+      "valor": 390370898.0,
+      "fecha_limite": "2026-10-30",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11070599",
+      "region": "Norte de Santander",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001486 H3",
       "entidad": "AEROCIVIL",
       "objeto": "63416C1526 REALIZAR CONTROL DE VEGETACIÓN MEDIANTE PODA Y/O TALA DE INDIVIDUOS ARBÓREOS Y LA RESPECTIVA COMPENSACION FORESTAL DEL AEROPUERTO ALFONSO BONILLA ARAGON",
@@ -295,6 +372,17 @@
       "valor": 599871681.0,
       "fecha_limite": "2026-11-05",
       "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001395 A H1",
+      "entidad": "AEROCIVIL",
+      "objeto": "63400C1617 ADQUIRIR BOLSA DE REPUESTOS; MATERALES; HERRAMIENTAS Y ACCESORIOS PARA EL MANTENIMIENTO PREVENTIVO Y CORRECTIVO DE LOS SISTEMAS CNS/MET REGIONAL OCCIDENTE",
+      "valor": 500000000.0,
+      "fecha_limite": "2026-11-12",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11075446",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -318,6 +406,17 @@
       "fecha_limite": "2026-11-06",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11053613",
       "region": "Cesar",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LP-MP-004 2026",
+      "entidad": "MUNICIPIO DE PLATO",
+      "objeto": "CONSTRUCCION DE SISTEMA FOTOVOLTAICO PARA LAS INSTALACIONES DEL PALACIO MUNICIPAL DE PLATO MAGDALENA",
+      "valor": 743722945.0,
+      "fecha_limite": "2026-11-12",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11070539",
+      "region": "Magdalena",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },

@@ -1,139 +1,7 @@
 {
-  "generado": "2026-11-03",
-  "total": 33,
+  "generado": "2026-11-06",
+  "total": 27,
   "procesos": [
-    {
-      "numero_proceso": "26001477 H1",
-      "entidad": "AEROCIVIL",
-      "objeto": "ELEMENTOS DE PROTECCION PERSONAL",
-      "valor": 298379404.0,
-      "fecha_limite": "2026-11-03",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11125505",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001501 H4",
-      "entidad": "AEROCIVIL",
-      "objeto": "63500C1262 REALIZAR EL MANTENIMIENTO INSTALACIONES FÍSICAS ÁREAS DE CONTROL Y APROXIMACIÓN DE TRÁNSITO AÉREO EN EL AEROPUERTO CAMILO DAZA DE CUCUTA",
-      "valor": 390370898.0,
-      "fecha_limite": "2026-11-03",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11145726",
-      "region": "Norte de Santander",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001502 H4",
-      "entidad": "AEROCIVIL",
-      "objeto": "63500C1367 REALIZAR SEÑALIZACION HORIZONTAL Y VERTICAL LADO AIRE EN EL AEROPUERTO DE TIBU",
-      "valor": 385000000.0,
-      "fecha_limite": "2026-11-03",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11145561",
-      "region": "Norte de Santander",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001382A H3 2026",
-      "entidad": "AEROCIVIL",
-      "objeto": "63600C1192 MANTENER LOS EQUIPOS ELECTRÓGENOS DE LOS AEROPUERTOS Y ESTACIONES AERONÁUTICAS DE LA REGIONAL ORIENTE",
-      "valor": 175000000.0,
-      "fecha_limite": "2026-11-03",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11125161",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001343 H4 DE 2026",
-      "entidad": "AEROCIVIL",
-      "objeto": "63600C1177 REALIZAR LAS ADECUACIONES DEL PUNTO DE ACCESO VEHICULAR ALFA 8 Y ALFA 13 DEL AEROPUERTO VANGUARDIA DE VILLAVICENCIO",
-      "valor": 430960000.0,
-      "fecha_limite": "2026-11-03",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11138620",
-      "region": "Meta",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001515 H3",
-      "entidad": "AEROCIVIL",
-      "objeto": "63300C1751 PRESTAR LOS SERVICIOS PARA DESARROLLAR LAS ACTIVIDADES CONTEMPLADAS EN EL PROGRAMA INTEGRAL DE BIENESTAR CLIMA LABORAL Y SALUD DE LOS FUNCIONARIOS DE LOS AEROPUERTOS DE SANTA MARTA Y EL BAN",
-      "valor": 38660424.0,
-      "fecha_limite": "2026-11-03",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11154457",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001486 H3",
-      "entidad": "AEROCIVIL",
-      "objeto": "63416C1526 REALIZAR CONTROL DE VEGETACIÓN MEDIANTE PODA Y/O TALA DE INDIVIDUOS ARBÓREOS Y LA RESPECTIVA COMPENSACION FORESTAL DEL AEROPUERTO ALFONSO BONILLA ARAGON",
-      "valor": 350000000.0,
-      "fecha_limite": "2026-11-04",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11021719",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001520 H3",
-      "entidad": "AEROCIVIL",
-      "objeto": "PRESTAR LOS SERVICIOS PARA DESARROLLAR LAS ACTIVIDADES CONTEMPLADAS EN EL PROGRAMA INTEGRAL DE BIENESTAR; CLIMA LABORAL Y SALUD DE LOS FUNCIONARIOS DE LOS AEROPUERTOS DE VALLEDUPAR; MOMPOX Y MAGANGUÉ",
-      "valor": 33388548.0,
-      "fecha_limite": "2026-11-04",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11137843",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001454 H2 DE 2026",
-      "entidad": "AEROCIVIL",
-      "objeto": "ADQUIRIR EQUIPOS BIOMÉDICOS E INSUMOS PARA LOS SERVICIOS MÉDICOS DE LOS AEROPUERTOS ADMINISTRADOS POR LA AEROCIVIL",
-      "valor": 599871681.0,
-      "fecha_limite": "2026-11-05",
-      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001531 H3",
-      "entidad": "AEROCIVIL",
-      "objeto": "63200C1267 REALIZAR MANTENIMIENTO Y/O CALIBRACION DE EQUIPOS DEL SISTEMA DE GESTION DE SEGURIDAD Y SALUD EN EL TRABAJO DE LA REGIONAL NOROCCIDENTE",
-      "valor": 8440451.0,
-      "fecha_limite": "2026-11-05",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11142684",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001101 H1A",
-      "entidad": "AEROCIVIL",
-      "objeto": "RECARGAR EL SISTEMA DE PAGO ELECTRONICO DE PEAJES PARA LOS VEHÍCULOS DE LA REGIONAL NOROCCIDENTE",
-      "valor": 80000000.0,
-      "fecha_limite": "2026-11-05",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11146323",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
-    {
-      "numero_proceso": "26001148 H1",
-      "entidad": "AEROCIVIL",
-      "objeto": "RECARGAR EL SISTEMA DE PAGO ELECTRONICO PARA EL SUMINISTRO DE COMBUSTIBLE DE LOS VEHÍCULOS Y PLANTAS DE LA REGIONAL NOROCCIDENTE",
-      "valor": 150000000.0,
-      "fecha_limite": "2026-11-05",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11146278",
-      "region": "Distrito Capital de Bogotá",
-      "categoria": "Aeronáutica Civil",
-      "estado": "Abierto"
-    },
     {
       "numero_proceso": "26001508 H4",
       "entidad": "AEROCIVIL",
@@ -196,6 +64,17 @@
       "valor": 7214900.0,
       "fecha_limite": "2026-11-09",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11152399",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001148 H1",
+      "entidad": "AEROCIVIL",
+      "objeto": "RECARGAR EL SISTEMA DE PAGO ELECTRONICO PARA EL SUMINISTRO DE COMBUSTIBLE DE LOS VEHÍCULOS Y PLANTAS DE LA REGIONAL NOROCCIDENTE",
+      "valor": 150000000.0,
+      "fecha_limite": "2026-11-10",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11146278",
       "region": "Distrito Capital de Bogotá",
       "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
@@ -267,6 +146,17 @@
       "estado": "Abierto"
     },
     {
+      "numero_proceso": "26001454 H2 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "ADQUIRIR EQUIPOS BIOMÉDICOS E INSUMOS PARA LOS SERVICIOS MÉDICOS DE LOS AEROPUERTOS ADMINISTRADOS POR LA AEROCIVIL",
+      "valor": 599871681.0,
+      "fecha_limite": "2026-11-24",
+      "link": "https://community.secop.gov.co/Public/Tendering/ContractNoticeManagement/Index",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
       "numero_proceso": "26001529 H3",
       "entidad": "AEROCIVIL",
       "objeto": "63400C1712 REALIZAR EL MANTENIMIENTO PREVENTIVO Y CORRECTIVO INCLUYE SUMINISTRO DE REPUESTOS Y REVISION TECNICOMECANICA DE LOS VEHICULOS TECNICOS; SAM Y AMBULANCIAS DE LA REGIONAL OCCIDENTE",
@@ -278,14 +168,25 @@
       "estado": "Abierto"
     },
     {
-      "numero_proceso": "SAM-002 DE 2026",
-      "entidad": "Rama Judicial  Dirección Seccional de Administración Judicial de Armenia",
-      "objeto": "Realizar los estudios; diseños; suministro; instalación; legalización y puesta en funcionamiento de sistemas solares fotovoltaicos conectados a la red para los Palacios de Justicia de Armenia y Calarc",
-      "valor": 925393891.0,
-      "fecha_limite": "2026-11-05",
-      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11107630",
-      "region": "Quindío",
-      "categoria": "Energía Solar Fotovoltaica",
+      "numero_proceso": "26001534 H2 DE 2026",
+      "entidad": "AEROCIVIL",
+      "objeto": "ADQUIRIR UNA SOLUCIÓN TECNOLÓGICA INTEGRAL PARA LA CAPTURA DE INFORMACIÓN EN CAMPO RELATIVA A LAS LABORES DE TOPOGRAFÍA E IDENTIFICACIÓN PREDIAL",
+      "valor": 397546267.0,
+      "fecha_limite": "2026-11-24",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11166606",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "26001533 H2",
+      "entidad": "AEROCIVIL",
+      "objeto": "63200C1516(NL) ADQUIRIR; INSTALAR Y PONER EN FUNCIONAMIENTO SISTEMAS DE RESPALDO DE ENERGÍA (UPS) PARA LA REGIONAL NOROCCIDENTE",
+      "valor": 1416000000.0,
+      "fecha_limite": "2026-11-25",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11165502",
+      "region": "Distrito Capital de Bogotá",
+      "categoria": "Aeronáutica Civil",
       "estado": "Abierto"
     },
     {
@@ -296,6 +197,17 @@
       "fecha_limite": "2026-11-06",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11053613",
       "region": "Cesar",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "REG-2026-057",
+      "entidad": "SERVICIOS INTEGRALES DEL ESTADO COLOMBIANO SIEC SAS SOCIEDAD DE ECONOMIA MIXTA1",
+      "objeto": "CONSTRUCCION DE SISTEMA DE ENERGIA SOLAR FOTOVOLTAICA EN LA ZONA RURAL PARA ALUMBRADO PUBLICO PARA EL CRUCE MONGUI - TOPAGA HASTA EL AREA URBANA DEL MUNICIPIO DE TOPAGA",
+      "valor": 1467332309.0,
+      "fecha_limite": "2026-11-09",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11165665",
+      "region": "Distrito Capital de Bogotá",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     },
@@ -362,6 +274,28 @@
       "fecha_limite": "2026-11-27",
       "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11116471",
       "region": "Distrito Capital de Bogotá",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "MM-LPO-SINF-004-2026",
+      "entidad": "MUNICIPIO DE MONTERREY",
+      "objeto": "CONSTRUCCIÓN DEL SISTEMA DE ILUMINACIÓN PÚBLICA FOTOVOLTAICA  EN LA CALLE 15 DEL MUNICIPIO DE MONTERREY; DEPARTAMENTO DE CASANARE",
+      "valor": 503941800.0,
+      "fecha_limite": "2026-11-27",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11167580",
+      "region": "Casanare",
+      "categoria": "Energía Solar Fotovoltaica",
+      "estado": "Abierto"
+    },
+    {
+      "numero_proceso": "LPMT-SI-005-2026",
+      "entidad": "MUNICIPIO DE TAURAMENA",
+      "objeto": "CONSTRUCCIÓN ALUMBRADO PUBLICO FOTOVOLTAICO TIPO OFF GRID PARA LUMINARIAS LED STAND ALONE, EN LAS ZONAS COMUNES DE VILLA ESTHER, PRIMAVERA, CENTRO, MASTRANTO, EN LA VEREDA ACEITE ALTO ANTIGUA VÍA AL RIO CAJA, EN LA VEREDA AGUABLANCA SECTOR CEMENTERIO Y PUENTE LA TAURAMENARA, EN LA CALLE 1B ENTRE CARRERAS 13 Y 14 EN EL MUNICIPIO DE TAURAMENA, CASANARE",
+      "valor": 1781306251.0,
+      "fecha_limite": "2026-12-01",
+      "link": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.11166029",
+      "region": "Casanare",
       "categoria": "Energía Solar Fotovoltaica",
       "estado": "Abierto"
     }

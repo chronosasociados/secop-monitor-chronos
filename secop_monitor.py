@@ -5,7 +5,7 @@ Monitor de procesos SECOP II para Chronos Asociados
 
 Consulta el dataset abierto oficial "SECOP II - Procesos de Contratación"
 (Colombia Compra Eficiente, vía datos.gov.co / Socrata) y reporta los procesos
-VIGENTES que cumplan CUALQUIERA de estos dos criterios independientes:
+VIGENTES que cumplan CUALQUIERA de estos tres criterios independientes:
 
   1. AERONÁUTICA CIVIL — todos los procesos publicados por la Unidad
      Administrativa Especial de Aeronáutica Civil, identificada por su NIT
@@ -15,6 +15,12 @@ VIGENTES que cumplan CUALQUIERA de estos dos criterios independientes:
      relacionados con paneles solares, energía solar/fotovoltaica y energías
      alternativas o similares (limpia, verde, renovable, sostenible, eólica,
      biomasa, etc.). Se busca por palabras clave en el nombre y la descripción.
+
+  3. ENTIDADES REGIONALES — todos los procesos, sin importar el objeto, de
+     las entidades de Arauca, Casanare, Vichada, Guaviare y Boyacá (alcaldías,
+     gobernaciones, descentralizadas y entidades nacionales con sede allí),
+     con valor superior a $350 millones en Arauca y a $450 millones en los
+     otros cuatro departamentos.
 
 "Vigente" significa: fecha límite de recepción aún no vencida Y el proceso no
 figura como adjudicado, cancelado, suspendido, desierto o terminado.
@@ -56,6 +62,65 @@ URL_BUSQUEDA_SECOP = "https://community.secop.gov.co/Public/Tendering/ContractNo
 # Etiquetas que espera la app de Base44 (no cambiar el texto).
 CAT_AEROCIVIL = "Aeronáutica Civil"
 CAT_SOLAR = "Energía Solar Fotovoltaica"
+
+CAT_REGIONAL = "Entidades Regionales"
+
+# Criterio 3: entidades regionales. Valor MÍNIMO EXCLUSIVO por departamento
+# (el proceso debe valer MÁS que esta cifra). Para agregar un departamento,
+# añade una línea aquí.
+VALOR_MINIMO_REGIONAL = {
+    "Arauca": 350_000_000,
+    "Casanare": 450_000_000,
+    "Vichada": 450_000_000,
+    "Guaviare": 450_000_000,
+    "Boyacá": 450_000_000,
+}
+
+# Entidades de esos departamentos que en SECOP II figuran SIN departamento
+# ("No Definido"), por lo que hay que buscarlas por NIT (tal como aparece en
+# SECOP; algunos traen dígito de verificación). Si aparece otra, agrégala aquí.
+ENTIDADES_EXTRA = {
+    "901023825": "Arauca",  # CENTRO EDUCATIVO LA ESMERALDA - ARAUQUITA
+    "800212625": "Arauca",  # CONTRALORÍA DEPARTAMENTAL DE ARAUCA
+    "800113549": "Arauca",  # EMPRESA MUNICIPAL DE SERVICIOS PUBLICOS DE ARAUCA EMSERPA E.I.C.E. E.S.P.
+    "834000421": "Arauca",  # ESTABLECIMIENTO PENITENCIARIO DE MEDIANA SEGURIDAD Y CARCELARIO DE ARAUCA - INPEC
+    "8002189794": "Arauca",  # HOSPITAL SAN VICENTE DE ARAUCA ESE
+    "892000705": "Arauca",  # INSTITUCION EDUCATIVA GENERAL SANTANDER - ARAUCA*
+    "800114869": "Arauca",  # INSTITUTO DE TRANSITO Y TRANSPORTE DEL DEPARTAMENTO DE ARAUCA
+    "800099202": "Boyacá",  # ALCALDÍA MUNICIPIO DE GÜICÁN
+    "820003774": "Boyacá",  # CÁRCEL Y PENITENCIARIA DE MEDIA SEGURIDAD DE TUNJA
+    "800204994": "Boyacá",  # COLEGIO NACIONALIZADO LA PRESENTACION DUITAMA
+    "800082204": "Boyacá",  # EMPOCHIQUINQUIRA E.S.P.
+    "820000992": "Boyacá",  # ESTABLECIMIENTO PENITENCIARIO DE MEDIANA SEGURIDAD Y CARCELARIO DE PUERTO BOYACÁ
+    "800110187": "Boyacá",  # INSTITUTO DE CULTURA Y BELLAS ARTES DE DUITAMA
+    "820000484": "Boyacá",  # INSTITUTO MUNICIPAL DE DEPORTE Y RECREACION DE PUERTO BOYACA
+    "826000522": "Boyacá",  # INSTITUTO PARA LA EDUCACION FISICA LA RECREACION Y EL DEPORTE DE DUITAMA
+    "891855618": "Boyacá",  # INSTITUTO TECNICO SANTO TOMAS DE AQUINO DUITAMA
+    "820001521": "Boyacá",  # PERSONERIA MUNICIPAL DE CHITARAQUE DEPARTAMENTO DE BOYACA
+    "800065593": "Boyacá",  # MUNICIPIO DE PAJARITO
+    "800099639": "Boyacá",  # MUNICIPIO DE TUNUNGUA
+    "891800896": "Boyacá",  # MUNICIPIO DE GUAYATA
+    "891801362": "Boyacá",  # MUNICIPIO DE OTANCHE
+    "891802106": "Boyacá",  # MUNICIPIO DE ZETAQUIRA
+    "891856593": "Boyacá",  # MUNICIPIO DE JERICO - BOYACA
+    "844001370": "Casanare",  # INSTITUCION EDUCATIVA TECNICO EMPRESARIAL DEL NORTE DE CASANARE
+    "844000635": "Casanare",  # ORGANIZACION REGIONAL INDIGENA DE CASANARE ORIC DEL MUNICIPIO DE YOPAL
+    "800086017": "Casanare",  # MUNICIPIO DE CHAMEZA
+    "800103196": "Guaviare",  # GOBERNACION DEL GUAVIARE
+    "800191431": "Guaviare",  # Alcaldia Municipio de Calamar Guaviare
+    "832000115": "Guaviare",  # CONTRALORIA DEPARTAMENTAL DEL GUAVIARE
+    "832001966": "Guaviare",  # EMPRESA SOCIAL DEL ESTADO HOSPITAL SAN JOSE DEL GUAVIARE
+    "900947497": "Guaviare",  # ASAMBLEA DEPARTALMENTAL DEL GUAVIARE
+    "800103308": "Vichada",  # ALCALDÍA DE LA PRIMAVERA - VICHADA
+    "842000081": "Vichada",  # ASAMBLEA DEPARTAMENTAL DE VICHADA
+}
+
+# NIT nacionales compartidos por todas las regionales del país: solo cuentan
+# si el NOMBRE de la entidad menciona el departamento.
+ENTIDADES_EXTRA_NIT_NACIONAL = {
+    "899999067": ["Arauca", "Casanare", "Vichada", "Guaviare", "Boyacá"],  # Contraloría General - gerencias departamentales
+    "899999069": ["Guaviare"],  # ICA - seccional Guaviare
+}
 
 # ---------------------------------------------------------------------------
 # Criterios de búsqueda (ajusta aquí si cambian)
@@ -133,8 +198,8 @@ _CONTEXTO_TERRENO = ("LOTE", "TERRENO", "PREDIO", "INMUEBLE", "FINCA", "URBANIZ"
 # Departamentos de interés, en el orden en que se muestran en el correo
 # (Arauca primero). Los demás departamentos salen después, en orden alfabético.
 DEPARTAMENTOS_PRIORITARIOS = [
-    "Arauca", "Vichada", "Casanare", "Guaviare", "Guainía", "Meta",
-    "Boyacá", "Santander", "Norte de Santander", "Cundinamarca",
+    "Arauca", "Casanare", "Vichada", "Guaviare", "Boyacá", "Guainía", "Meta",
+    "Santander", "Norte de Santander", "Cundinamarca",
 ]
 
 # Anclas de ubicación: municipios, aeropuertos y nombres del departamento. SOLO
@@ -150,7 +215,10 @@ MUNICIPIOS_POR_DEPARTAMENTO = {
         "Tame", "Santiago Pérez", "Los Colonizadores", "Gustavo Vargas",
     ],
     "Vichada": ["Vichada", "Puerto Carreño", "Germán Olano", "Cumaribo"],
-    "Casanare": ["Casanare", "Yopal", "El Alcaraván", "Paz de Ariporo", "Támara", "Trinidad", "Hato Corozal"],
+    "Casanare": [
+        "Casanare", "Yopal", "El Alcaraván", "Paz de Ariporo", "Támara", "Trinidad", "Hato Corozal",
+        "Orocué", "Aguazul", "Tauramena",
+    ],
     "Guaviare": ["Guaviare", "San José del Guaviare", "Jorge Enrique González", "El Retorno"],
     "Guainía": ["Guainía", "Inírida", "César Gaviria Trujillo"],
     "Meta": [
@@ -212,20 +280,36 @@ def _referencia(p: dict) -> str:
 
 
 def objeto_y_detalle(p: dict) -> tuple[str, str]:
-    """(objeto principal, detalle). Si el nombre es genérico o es solo el
-    número del proceso, el objeto real está en la descripción."""
+    """(título, objeto completo). El objeto completo es la descripción del
+    procedimiento, SIN recortar. El título es el nombre del procedimiento y
+    solo se devuelve si aporta algo distinto (no es genérico, ni el número del
+    proceso, ni el comienzo de la descripción)."""
     nombre = limpiar_fase(p.get("nombre_del_procedimiento"))
-    desc = limpiar_fase(p.get("descripci_n_del_procedimiento"))
-    ref_n = _norm(_referencia(p))
+    desc = (p.get("descripci_n_del_procedimiento") or "").strip()
+    if not desc:
+        return "", nombre or "(sin objeto registrado)"
     nombre_n = _norm(nombre)
-    generico = (not nombre) or nombre_n == ref_n or nombre_n in _NOMBRES_GENERICOS
-    principal = desc if (generico and desc) else (nombre or desc)
-    detalle = ""
-    if desc and _norm(desc)[:60] != _norm(principal)[:60]:
-        detalle = desc
-    if len(detalle) > 300:
-        detalle = detalle[:297].rstrip() + "..."
-    return principal, detalle
+    generico = (not nombre) or nombre_n == _norm(_referencia(p)) or nombre_n in _NOMBRES_GENERICOS
+    repetido = _norm(desc).replace(",", ";").startswith(nombre_n.replace(",", ";")[:50])
+    return ("" if (generico or repetido) else nombre), desc
+
+
+def objeto_completo(p: dict) -> str:
+    titulo, objeto = objeto_y_detalle(p)
+    return f"{titulo}. {objeto}" if titulo else objeto
+
+
+def etapa(p: dict) -> str:
+    """Etapa del proceso al momento del reporte: fase + estado del procedimiento."""
+    fase = (p.get("fase") or "").strip()
+    estado = (p.get("estado_del_procedimiento") or "").strip()
+    if fase and estado and _norm(estado) != _norm(fase):
+        return f"{fase} (estado: {estado})"
+    return fase or estado or "No informada"
+
+
+def _modalidad(p: dict) -> str:
+    return (p.get("modalidad_de_contratacion") or "").strip() or "No informada"
 
 
 def _url_proceso(p: dict) -> str:
@@ -320,6 +404,20 @@ def where_solar(hoy: datetime.date) -> str:
     )
 
 
+def _sql_lista(valores) -> str:
+    return ", ".join("'" + v.replace("'", "''") + "'" for v in valores)
+
+
+def where_regional(hoy: datetime.date) -> str:
+    nits = list(ENTIDADES_EXTRA) + list(ENTIDADES_EXTRA_NIT_NACIONAL)
+    return (
+        f"( departamento_entidad in ({_sql_lista(VALOR_MINIMO_REGIONAL)}) "
+        f"OR nit_entidad in ({_sql_lista(nits)}) ) "
+        f"AND precio_base > {min(VALOR_MINIMO_REGIONAL.values())} "
+        f"AND fecha_de_recepcion_de >= '{_fecha_iso(hoy)}'"
+    )
+
+
 # ---------------------------------------------------------------------------
 # Filtros precisos
 # ---------------------------------------------------------------------------
@@ -380,6 +478,35 @@ def obtener_solar(hoy: datetime.date) -> list[dict]:
     ]
 
 
+_DEPTO_REGIONAL_NORM = {_norm(d): d for d in VALOR_MINIMO_REGIONAL}
+
+
+def departamento_regional(p: dict):
+    """Departamento (de los del criterio 3) al que pertenece la ENTIDAD, o None."""
+    depto = _DEPTO_REGIONAL_NORM.get(_norm(p.get("departamento_entidad")).strip())
+    if depto:
+        return depto
+    nit = re.sub(r"\D", "", p.get("nit_entidad") or "")
+    if nit in ENTIDADES_EXTRA:
+        return ENTIDADES_EXTRA[nit]
+    if nit in ENTIDADES_EXTRA_NIT_NACIONAL:
+        nombre = _norm(p.get("entidad"))
+        for d in ENTIDADES_EXTRA_NIT_NACIONAL[nit]:
+            if re.search(r"(?<!\w)" + re.escape(_norm(d)) + r"(?!\w)", nombre):
+                return d
+    return None
+
+
+def obtener_regional(hoy: datetime.date) -> list[dict]:
+    resultado = []
+    for p in _consultar(where_regional(hoy)):
+        depto = departamento_regional(p)
+        if depto and esta_vigente(p, hoy) and _valor(p) > VALOR_MINIMO_REGIONAL[depto]:
+            p["_depto"] = depto  # la entidad manda: no se reclasifica por el texto
+            resultado.append(p)
+    return resultado
+
+
 # ---------------------------------------------------------------------------
 # Clasificación, deduplicación y orden
 # ---------------------------------------------------------------------------
@@ -403,22 +530,50 @@ _PATRONES_ANCLA = {
 }
 
 
+_SIN_DEPTO = ("NO DEFINIDO", "NO DEFINIDA", "")
+
+
+def _buscar_ancla(texto: str):
+    mejor, pos_mejor = None, None
+    for depto, patrones in _PATRONES_ANCLA.items():
+        for pat in patrones:
+            m = pat.search(texto)
+            if m and (pos_mejor is None or m.start() < pos_mejor):
+                mejor, pos_mejor = depto, m.start()
+    return mejor
+
+
 def clasificar_departamento(p: dict) -> str:
-    """Departamento de la entidad. Solo para entidades nacionales se busca una
-    ancla (municipio, aeropuerto o nombre del departamento) en el texto, por
-    palabra completa, para ubicar la obra; si hay varias, gana la que aparece
-    primero en el texto."""
-    if _es_entidad_nacional(p):
-        texto = _texto_proceso(p)
-        mejor, pos_mejor = None, None
-        for depto, patrones in _PATRONES_ANCLA.items():
-            for pat in patrones:
-                m = pat.search(texto)
-                if m and (pos_mejor is None or m.start() < pos_mejor):
-                    mejor, pos_mejor = depto, m.start()
-        if mejor:
-            return mejor
-    return (p.get("departamento_entidad") or "").strip() or "Sin departamento (Nacional)"
+    """Sección del reporte en la que va el proceso.
+
+    1. Entidades regionales (criterio 3): el departamento de la entidad.
+    2. Entidades territoriales con departamento registrado: ese departamento.
+    3. Entidades nacionales (p.ej. Aerocivil) o sin departamento registrado:
+       se busca una ancla (municipio, aeropuerto o nombre del departamento),
+       por palabra completa; gana la que aparece primero. Para las entidades
+       sin departamento se mira primero el NOMBRE de la entidad.
+    4. Aerocivil sin ancla: se agrupa por la regional que publica el proceso
+       (una regional cubre varios departamentos).
+    """
+    if p.get("_depto"):
+        return p["_depto"]
+    depto = (p.get("departamento_entidad") or "").strip()
+    sin_depto = _norm(depto) in _SIN_DEPTO
+    if sin_depto:
+        ancla = _buscar_ancla(_norm(p.get("entidad")))
+        if ancla:
+            return ancla
+    if sin_depto or _es_entidad_nacional(p):
+        ancla = _buscar_ancla(_texto_proceso(p))
+        if ancla:
+            return ancla
+    if es_aerocivil(p):
+        unidad = " ".join((p.get("nombre_de_la_unidad_de") or "").split()).title()
+        ciudad = (p.get("ciudad_de_la_unidad_de") or "").strip()
+        if unidad:
+            sede = f" (sede {ciudad})" if ciudad and _norm(ciudad) != "NO APLICA" else ""
+            return f"{_PREFIJO_AERO}{unidad}{sede}"
+    return _CATCHALL if sin_depto else depto
 
 
 def _clave_dedup(p: dict) -> tuple:
@@ -428,7 +583,12 @@ def _clave_dedup(p: dict) -> tuple:
     return ("entidad_nombre", p.get("entidad"), (p.get("nombre_del_procedimiento") or "")[:80])
 
 
-_ORDEN_FASE = ["borrador", "planeación", "manifestación de interés", "presentación de oferta", "evaluación", "adjudicación"]
+# De la etapa más temprana a la más avanzada. "Presentación de observaciones"
+# (al proyecto de pliego) es ANTERIOR a la presentación de ofertas.
+_ORDEN_FASE = [
+    "borrador", "planeación", "observaciones", "manifestación de interés",
+    "presentación de oferta", "evaluación", "adjudicación",
+]
 
 
 def _prioridad_fase(p: dict) -> int:
@@ -436,7 +596,7 @@ def _prioridad_fase(p: dict) -> int:
     for i, palabra in enumerate(_ORDEN_FASE):
         if palabra in fase:
             return i
-    return len(_ORDEN_FASE) // 2
+    return 2
 
 
 def deduplicar(procesos: list[dict]) -> list[dict]:
@@ -461,11 +621,12 @@ def _agrupar_por_departamento(procesos: list[dict]) -> dict[str, list[dict]]:
     return por_depto
 
 
-_CATCHALL = "Sin departamento (Nacional)"
+_CATCHALL = "Sin departamento registrado"
+_PREFIJO_AERO = "Aerocivil - "
 
 
 def _es_prioritario(depto: str) -> bool:
-    return _norm(depto) in {_norm(d) for d in DEPARTAMENTOS_PRIORITARIOS}
+    return depto.startswith(_PREFIJO_AERO) or _norm(depto) in {_norm(d) for d in DEPARTAMENTOS_PRIORITARIOS}
 
 
 def _orden_departamentos(por_depto: dict) -> list[str]:
@@ -473,8 +634,11 @@ def _orden_departamentos(por_depto: dict) -> list[str]:
     luego los demás en orden alfabético, y al final el catch-all."""
     rango = {_norm(d): i for i, d in enumerate(DEPARTAMENTOS_PRIORITARIOS)}
     prioritarios = sorted((d for d in por_depto if _norm(d) in rango), key=lambda d: rango[_norm(d)])
-    otros = sorted(d for d in por_depto if _norm(d) not in rango and d != _CATCHALL)
-    return prioritarios + otros + ([_CATCHALL] if _CATCHALL in por_depto else [])
+    aero = sorted(d for d in por_depto if d.startswith(_PREFIJO_AERO))
+    otros = sorted(
+        d for d in por_depto if _norm(d) not in rango and d != _CATCHALL and not d.startswith(_PREFIJO_AERO)
+    )
+    return prioritarios + aero + otros + ([_CATCHALL] if _CATCHALL in por_depto else [])
 
 
 def _dias_restantes(p: dict, hoy: datetime.date):
@@ -489,38 +653,63 @@ def _dias_restantes(p: dict, hoy: datetime.date):
 # Salidas: Base44, texto y HTML
 # ---------------------------------------------------------------------------
 
-def a_registro_base44(p: dict, categoria: str) -> dict:
-    """Formato exacto que espera la entidad ProcesoSecop de la app de Base44."""
-    objeto, _ = objeto_y_detalle(p)
+def _categoria_base44(p: dict) -> str:
+    cats = p.get("_cats") or []
+    if "aero" in cats:
+        return CAT_AEROCIVIL
+    if "solar" in cats:
+        return CAT_SOLAR
+    return CAT_REGIONAL
+
+
+def a_registro_base44(p: dict) -> dict:
+    """Formato que espera la entidad ProcesoSecop de la app de Base44 (los
+    campos originales no cambian; modalidad, etapa y entidad_ubicacion son nuevos)."""
     return {
         "numero_proceso": _referencia(p),
         "entidad": p.get("entidad") or "",
-        "objeto": objeto,
+        "objeto": objeto_completo(p),
         "valor": _valor(p),
         "fecha_limite": (p.get("fecha_de_recepcion_de") or "")[:10] or None,
         "link": _url_proceso(p) or URL_BUSQUEDA_SECOP,
         "region": clasificar_departamento(p),
-        "categoria": categoria,
+        "categoria": _categoria_base44(p),
         "estado": "Abierto",
+        "modalidad": _modalidad(p),
+        "etapa": etapa(p),
+        "id_secop": p.get("id_del_proceso") or "",
     }
 
 
-ETIQUETAS = {"aero": "Aerocivil", "solar": "Solar / energías"}
-COLORES = {"aero": "#1d4ed8", "solar": "#b45309"}
+ETIQUETAS = {"aero": "Aerocivil", "solar": "Solar / energías", "regional": "Entidad regional"}
+COLORES = {"aero": "#1d4ed8", "solar": "#b45309", "regional": "#047857"}
+_ORDEN_CATS = ["aero", "solar", "regional"]
 
 
-def _cuenta(procesos: list[dict]) -> tuple[int, int]:
-    n_aero = sum(1 for p in procesos if p.get("_cat") == "aero")
-    return n_aero, len(procesos) - n_aero
+def _cuenta(procesos: list[dict]) -> str:
+    partes = []
+    for c in _ORDEN_CATS:
+        n = sum(1 for p in procesos if c in (p.get("_cats") or []))
+        partes.append(f"{ETIQUETAS[c]}: {n}")
+    return " · ".join(partes)
+
+
+def _fecha_larga(fecha: str) -> str:
+    try:
+        d = datetime.date.fromisoformat(fecha)
+    except ValueError:
+        return fecha or "No informada"
+    return f"{d.day:02d}/{d.month:02d}/{d.year}"
+
+
+def _ubicacion(p: dict) -> str:
+    ciudad = (p.get("ciudad_entidad") or "").strip()
+    return "" if _norm(ciudad) in _SIN_DEPTO else ciudad
 
 
 def formatear_resumen(procesos: list[dict], hoy: datetime.date, avisos: list[str]) -> str:
-    """Texto plano, organizado por DEPARTAMENTO (Arauca primero)."""
-    n_aero, n_solar = _cuenta(procesos)
-    lineas = [
-        f"SECOP - Oportunidades abiertas del {hoy.isoformat()} "
-        f"({len(procesos)} procesos: Aerocivil {n_aero} · Solar/energías {n_solar})"
-    ]
+    """Texto plano: una sección por DEPARTAMENTO; dentro, por fecha de cierre."""
+    lineas = [f"SECOP - Procesos abiertos al {_fecha_larga(hoy.isoformat())} ({len(procesos)} procesos; {_cuenta(procesos)})"]
     for a in avisos:
         lineas.append(f"\n[ATENCIÓN] {a}")
     if not procesos:
@@ -528,48 +717,47 @@ def formatear_resumen(procesos: list[dict], hoy: datetime.date, avisos: list[str
         return "\n".join(lineas)
     por_depto = _agrupar_por_departamento(procesos)
     orden = _orden_departamentos(por_depto)
-    lineas.append("\nPor departamento: " + " · ".join(f"{d} ({len(por_depto[d])})" for d in orden))
-    hubo_prioritario = mostro_otros = False
+    lineas.append("\nRESUMEN POR DEPARTAMENTO")
+    for d in orden:
+        total = sum(_valor(p) for p in por_depto[d])
+        lineas.append(f"  {d}: {len(por_depto[d])} procesos · {_fmt_cop(total)}")
     for depto in orden:
         items = por_depto[depto]
-        if _es_prioritario(depto):
-            hubo_prioritario = True
-        elif hubo_prioritario and not mostro_otros:
-            mostro_otros = True
-            lineas.append("\n---------- OTROS DEPARTAMENTOS ----------")
-        lineas.append(f"\n=== {depto.upper()} ({len(items)}) ===")
-        for p in items:
+        lineas.append("\n" + "=" * 70)
+        lineas.append(f"{depto.upper()} ({len(items)} procesos)")
+        lineas.append("=" * 70)
+        for i, p in enumerate(items, 1):
             fecha, dias = _dias_restantes(p, hoy)
-            objeto, detalle = objeto_y_detalle(p)
-            ubic = p.get("ciudad_entidad") or p.get("departamento_entidad") or "s/d"
-            etiqueta = ETIQUETAS.get(p.get("_cat"), "")
+            ubic = _ubicacion(p)
+            criterios = ", ".join(ETIQUETAS[c] for c in _ORDEN_CATS if c in (p.get("_cats") or []))
             lineas.append(
-                f"- [{etiqueta}] Nº proceso: {_referencia(p)}\n"
-                f"  Entidad: {p.get('entidad')} ({ubic})\n"
-                f"  Objeto: {objeto}\n"
-                + (f"  Detalle: {detalle}\n" if detalle else "")
-                + f"  Valor: {_fmt_cop(_valor(p))} | Cierra: {fecha} ({dias if dias is not None else '?'} días) | "
-                f"Modalidad: {p.get('modalidad_de_contratacion')} | Fase: {p.get('fase')}\n"
-                f"  Link: {_url_proceso(p) or 'Sin enlace directo — buscar la referencia en ' + URL_BUSQUEDA_SECOP}"
+                f"\n{i}. Nº de proceso: {_referencia(p)}\n"
+                f"   Entidad: {p.get('entidad')}" + (f" ({ubic})" if ubic else "") + "\n"
+                f"   Objeto: {objeto_completo(p)}\n"
+                f"   Valor: {_fmt_cop(_valor(p))}\n"
+                f"   Modalidad de selección: {_modalidad(p)}\n"
+                f"   Etapa al momento del reporte: {etapa(p)}\n"
+                f"   Fecha de cierre: {_fecha_larga(fecha)} (faltan {dias if dias is not None else '?'} días)\n"
+                f"   Link: {_url_proceso(p) or 'Sin enlace directo; buscar el número en ' + URL_BUSQUEDA_SECOP}\n"
+                f"   Criterio: {criterios}"
             )
     return "\n".join(lineas)
 
 
 def formatear_resumen_html(procesos: list[dict], hoy: datetime.date, avisos: list[str]) -> str:
-    """HTML organizado por DEPARTAMENTO (Arauca primero); dentro de cada uno,
-    por fecha de cierre, con una etiqueta que indica el criterio."""
+    """HTML: índice por departamento y una tabla por DEPARTAMENTO; dentro de
+    cada uno, por fecha de cierre."""
     e = html.escape
-    st_tabla = "width:100%;border-collapse:collapse;margin:0 0 24px 0;font-family:Arial,sans-serif;font-size:13px;"
+    st_tabla = "width:100%;border-collapse:collapse;margin:0 0 28px 0;font-family:Arial,sans-serif;font-size:13px;"
     st_th = "text-align:left;padding:6px 8px;background:#1f2937;color:#ffffff;border:1px solid #d1d5db;"
     st_td = "padding:6px 8px;border:1px solid #d1d5db;vertical-align:top;"
     gris = "color:#6b7280;"
 
-    n_aero, n_solar = _cuenta(procesos)
     partes = [
         "<html><body style='font-family:Arial,sans-serif;color:#111827;'>",
-        "<h1 style='margin-bottom:4px;font-size:20px;'>SECOP - Oportunidades abiertas</h1>",
-        f"<p style='margin-top:0;{gris}'>{hoy.isoformat()} &middot; {len(procesos)} procesos "
-        f"(Aerocivil {n_aero} &middot; Solar/energías {n_solar})</p>",
+        "<h1 style='margin-bottom:4px;font-size:20px;'>SECOP - Procesos abiertos</h1>",
+        f"<p style='margin-top:0;{gris}'>Reporte del {_fecha_larga(hoy.isoformat())} &middot; {len(procesos)} procesos "
+        f"({e(_cuenta(procesos))})</p>",
     ]
     for a in avisos:
         partes.append(
@@ -582,72 +770,78 @@ def formatear_resumen_html(procesos: list[dict], hoy: datetime.date, avisos: lis
 
     por_depto = _agrupar_por_departamento(procesos)
     orden = _orden_departamentos(por_depto)
-    partes.append(
-        f"<p style='font-size:13px;'><b>Por departamento:</b> "
-        + " &middot; ".join(f"{e(d)} ({len(por_depto[d])})" for d in orden)
-        + "</p>"
-    )
 
-    hubo_prioritario = mostro_otros = False
+    partes.append(f"<table style='{st_tabla}width:auto;'>")
+    partes.append(
+        f"<tr><th style='{st_th}'>Departamento</th><th style='{st_th}'>Procesos</th>"
+        f"<th style='{st_th}'>Valor total</th></tr>"
+    )
+    for d in orden:
+        total = sum(_valor(p) for p in por_depto[d])
+        partes.append(
+            f"<tr><td style='{st_td}'><b>{e(d)}</b></td>"
+            f"<td style='{st_td}text-align:right;'>{len(por_depto[d])}</td>"
+            f"<td style='{st_td}text-align:right;white-space:nowrap;'>{e(_fmt_cop(total))}</td></tr>"
+        )
+    partes.append("</table>")
+
     for depto in orden:
         items = por_depto[depto]
-        if _es_prioritario(depto):
-            hubo_prioritario = True
-        elif hubo_prioritario and not mostro_otros:
-            mostro_otros = True
-            partes.append(
-                f"<p style='{gris}font-size:12px;text-transform:uppercase;letter-spacing:1px;"
-                "border-top:2px solid #9ca3af;padding-top:12px;margin-top:32px;'>Otros departamentos</p>"
-            )
         partes.append(
-            f"<h2 style='background:#e5e7eb;padding:8px;margin:24px 0 8px 0;font-size:16px;'>"
-            f"{e(depto)} <span style='{gris}font-weight:normal;'>({len(items)})</span></h2>"
+            f"<h2 style='background:#1f2937;color:#ffffff;padding:10px;margin:28px 0 0 0;font-size:17px;'>"
+            f"{e(depto.upper())} <span style='font-weight:normal;'>&middot; {len(items)} procesos</span></h2>"
         )
         partes.append(f"<table style='{st_tabla}'>")
         partes.append(
             "<tr>"
-            f"<th style='{st_th}'>Proceso / Entidad</th>"
+            f"<th style='{st_th}'>N&ordm; de proceso / Entidad</th>"
             f"<th style='{st_th}'>Objeto</th>"
             f"<th style='{st_th}'>Valor</th>"
-            f"<th style='{st_th}'>Modalidad / Fase</th>"
-            f"<th style='{st_th}'>Cierra</th>"
-            f"<th style='{st_th}'>Ver</th>"
+            f"<th style='{st_th}'>Modalidad de selecci&oacute;n</th>"
+            f"<th style='{st_th}'>Etapa actual</th>"
+            f"<th style='{st_th}'>Fecha de cierre</th>"
+            f"<th style='{st_th}'>Link</th>"
             "</tr>"
         )
         for p in items:
             fecha, dias = _dias_restantes(p, hoy)
-            objeto, detalle = objeto_y_detalle(p)
-            ubic = p.get("ciudad_entidad") or p.get("departamento_entidad") or "s/d"
+            ubic = _ubicacion(p)
             urgente = dias is not None and dias <= 5
             st_dias = "color:#b91c1c;font-weight:bold;" if urgente else gris
-            cat = p.get("_cat")
-            badge = (
-                f"<span style='background:{COLORES.get(cat, '#374151')};color:#ffffff;font-size:11px;"
-                f"padding:1px 6px;border-radius:3px;'>{e(ETIQUETAS.get(cat, ''))}</span><br>"
+            badges = "".join(
+                f"<span style='background:{COLORES[c]};color:#ffffff;font-size:11px;"
+                f"padding:1px 6px;border-radius:3px;margin-right:3px;'>{e(ETIQUETAS[c])}</span>"
+                for c in _ORDEN_CATS if c in (p.get("_cats") or [])
             )
             url = _url_proceso(p)
             enlace = (
-                f"<a href='{e(url, quote=True)}'>Abrir</a>"
+                f"<a href='{e(url, quote=True)}'>Abrir en SECOP</a>"
                 if url
-                else f"<a href='{e(URL_BUSQUEDA_SECOP, quote=True)}'>Buscar</a>"
-                f"<br><span style='{gris}font-size:11px;'>sin enlace directo</span>"
+                else f"<a href='{e(URL_BUSQUEDA_SECOP, quote=True)}'>Buscar en SECOP</a>"
+                f"<br><span style='{gris}font-size:11px;'>sin enlace directo: buscar por el n&uacute;mero</span>"
             )
             partes.append(
                 "<tr>"
-                f"<td style='{st_td}'>{badge}<b>{e(_referencia(p))}</b><br>{e(p.get('entidad') or '')}"
-                f"<br><span style='{gris}'>{e(ubic)}</span></td>"
-                f"<td style='{st_td}'>{e(objeto)}"
-                + (f"<br><span style='{gris}font-size:12px;'>{e(detalle)}</span>" if detalle else "")
-                + "</td>"
-                f"<td style='{st_td}white-space:nowrap;'>{e(_fmt_cop(_valor(p)))}</td>"
-                f"<td style='{st_td}'>{e(p.get('modalidad_de_contratacion') or '')}"
-                f"<br><span style='{gris}'>{e(p.get('fase') or '')}</span></td>"
-                f"<td style='{st_td}white-space:nowrap;'>{e(fecha)}"
-                f"<br><span style='{st_dias}'>{dias if dias is not None else '?'} días</span></td>"
+                f"<td style='{st_td}'><b style='font-size:14px;'>{e(_referencia(p))}</b><br>{e(p.get('entidad') or '')}"
+                + (f"<br><span style='{gris}'>{e(ubic)}</span>" if ubic else "")
+                + f"<br>{badges}</td>"
+                f"<td style='{st_td}'>{e(objeto_completo(p))}</td>"
+                f"<td style='{st_td}white-space:nowrap;text-align:right;'>{e(_fmt_cop(_valor(p)))}</td>"
+                f"<td style='{st_td}'>{e(_modalidad(p))}</td>"
+                f"<td style='{st_td}'>{e(etapa(p))}</td>"
+                f"<td style='{st_td}white-space:nowrap;'>{e(_fecha_larga(fecha))}"
+                f"<br><span style='{st_dias}'>faltan {dias if dias is not None else '?'} d&iacute;as</span></td>"
                 f"<td style='{st_td}'>{enlace}</td>"
                 "</tr>"
             )
         partes.append("</table>")
+    partes.append(
+        f"<p style='{gris}font-size:12px;'>Criterios: (1) Aeron&aacute;utica Civil, todos los procesos; "
+        "(2) energ&iacute;a solar y alternativas en todo el pa&iacute;s, desde $500 millones; "
+        "(3) entidades de Arauca (m&aacute;s de $350 millones) y de Casanare, Vichada, Guaviare y Boyac&aacute; "
+        "(m&aacute;s de $450 millones). Fuente: datos abiertos SECOP II. La etapa y la fecha de cierre son las "
+        "registradas al momento del reporte; conf&iacute;rmalas en el link de cada proceso.</p>"
+    )
     partes.append("</body></html>")
     return "\n".join(partes)
 
@@ -679,46 +873,54 @@ def main():
         default="secop_data.json",
         help="Ruta del resumen listo para la app de Base44 (por defecto secop_data.json).",
     )
+    ap.add_argument("--html", help="Ruta opcional para guardar el correo en HTML (para revisarlo sin enviarlo)")
     args = ap.parse_args()
 
     # Fecha en hora de Colombia (en GitHub Actions el reloj está en UTC).
     hoy = datetime.datetime.now(ZoneInfo("America/Bogota")).date()
 
     avisos: list[str] = []
-    aero: list[dict] = []
-    solar: list[dict] = []
-    ok_aero = ok_solar = True
-    try:
-        aero = deduplicar(obtener_aerocivil(hoy))
-    except Exception as exc:  # noqa: BLE001
-        ok_aero = False
-        avisos.append(f"No se pudo consultar el criterio 1 (Aerocivil): {exc}")
-    try:
-        solar = deduplicar(obtener_solar(hoy))
-    except Exception as exc:  # noqa: BLE001
-        ok_solar = False
-        avisos.append(f"No se pudo consultar el criterio 2 (energía solar/alternativas): {exc}")
+    criterios = [
+        ("aero", "criterio 1 (Aerocivil)", obtener_aerocivil),
+        ("solar", "criterio 2 (energía solar/alternativas)", obtener_solar),
+        ("regional", "criterio 3 (entidades regionales)", obtener_regional),
+    ]
+    # Un proceso que cumple varios criterios se muestra UNA sola vez, con
+    # todas sus etiquetas.
+    encontrados: list[dict] = []
+    todo_ok = True
+    for cat, nombre, obtener in criterios:
+        try:
+            for p in obtener(hoy):
+                p["_cats"] = [cat]
+                encontrados.append(p)
+        except Exception as exc:  # noqa: BLE001
+            todo_ok = False
+            avisos.append(f"No se pudo consultar el {nombre}: {exc}")
 
-    # Un proceso que cumple ambos criterios se muestra una sola vez, como Aerocivil.
-    claves_aero = {_clave_dedup(p) for p in aero}
-    solar = [p for p in solar if _clave_dedup(p) not in claves_aero]
-
-    for p in aero:
-        p["_cat"] = "aero"
-    for p in solar:
-        p["_cat"] = "solar"
-    todos = aero + solar
+    cats_por_clave: dict = {}
+    depto_por_clave: dict = {}
+    for p in encontrados:
+        clave = _clave_dedup(p)
+        cats_por_clave.setdefault(clave, set()).update(p["_cats"])
+        if p.get("_depto"):
+            depto_por_clave[clave] = p["_depto"]
+    todos = deduplicar(encontrados)
+    for p in todos:
+        clave = _clave_dedup(p)
+        p["_cats"] = [c for c in _ORDEN_CATS if c in cats_por_clave[clave]]
+        if clave in depto_por_clave:
+            p["_depto"] = depto_por_clave[clave]
 
     if args.json:
         with open(args.json, "w", encoding="utf-8") as f:
             json.dump(todos, f, ensure_ascii=False, indent=2)
 
-    # El JSON de Base44 solo se reescribe si AMBAS consultas funcionaron, para
-    # no borrar los datos buenos con un resultado vacío por una falla de red.
-    if ok_aero and ok_solar:
-        registros = [
-            a_registro_base44(p, CAT_AEROCIVIL if p["_cat"] == "aero" else CAT_SOLAR) for p in todos
-        ]
+    # El JSON de Base44 solo se reescribe si TODAS las consultas funcionaron,
+    # para no borrar los datos buenos con un resultado vacío por una falla de red.
+    if todo_ok:
+        por_depto = _agrupar_por_departamento(todos)
+        registros = [a_registro_base44(p) for d in _orden_departamentos(por_depto) for p in por_depto[d]]
         with open(args.base44_json, "w", encoding="utf-8") as f:
             json.dump(
                 {"generado": hoy.isoformat(), "total": len(registros), "procesos": registros},
@@ -728,8 +930,11 @@ def main():
     texto = formatear_resumen(todos, hoy, avisos)
     cuerpo_html = formatear_resumen_html(todos, hoy, avisos)
     print(texto)
+    if args.html:
+        with open(args.html, "w", encoding="utf-8") as f:
+            f.write(cuerpo_html)
 
-    asunto = f"SECOP - Oportunidades del {hoy.isoformat()} (Aerocivil: {len(aero)} · Solar/energías: {len(solar)})"
+    asunto = f"SECOP - Procesos abiertos al {_fecha_larga(hoy.isoformat())} ({len(todos)} procesos; {_cuenta(todos)})"
     if avisos:
         asunto = "[CON ERRORES] " + asunto
     enviar_por_correo(asunto, texto, cuerpo_html)
